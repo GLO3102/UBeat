@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% include head.ejs %>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+<% include nav.ejs %>
+
+<section class="intro">
+    <div class="intro-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2>LOGGED INTO U.BEAT</h2>
+                    <img class="user-avatar" src="<%= user.gravatar %>" alt="User avatar"/>
+                    <p class="intro-text">Welcome <b><%= user.name %></b> to your new music library.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<% include scripts.ejs %>
+
+</body>
+</html>
