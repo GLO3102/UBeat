@@ -1,26 +1,35 @@
 {
-  "name": "UBeat",
-  "version": "0.0.0",
-  "description": "A REST API for the GLO-3102 class project UBeat",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "express": "~3.4.x"
-  },
-  "engines": {
-    "node": "0.10.x",
-    "npm": "1.3.x"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/heroku"
-  },
-  "keywords": [
-    "node",
-    "heroku"
-  ],
-  "author": "William Fortin & Vincent Seguin",
-  "license": "MIT"
+    "name": "UBeat",
+    "version": "0.0.0",
+    "description": "A REST API for the GLO-3102 class project UBeat",
+    "main": "index.js",
+    "dependencies": {
+        "cors": "~2.2.0",
+        "ejs": "~1.0.0",
+        "express": "~3.4.8",
+        "gravatar": "~1.0.6",
+        "passport": "~0.2.0",
+        "passport-facebook": "~1.0.3",
+        "passport-google": "~0.3.0",
+        "passport-local": "~1.0.0"
+    },
+    "devDependencies": {
+        "gulp": "~3.6.0",
+        "gulp-concat": "~2.2.0",
+        "gulp-less": "~1.2.3",
+        "gulp-nodemon": "~1.0.2"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wfortin/UBeat.git"
+    },
+    "author": "William Fortin & Vincent Seguin",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/wfortin/UBeat/issues"
+    },
+    "homepage": "https://github.com/wfortin/UBeat"
 }

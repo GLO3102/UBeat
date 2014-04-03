@@ -1,4 +1,5 @@
 var express = require('express')
+    , cors = require('cors')
     , passport = require('passport')
     , gravatar = require('gravatar')
     , util = require('util')
@@ -23,6 +24,12 @@ passport.use(new GoogleStrategy({
 ));
 
 var app = express();
+var corsOptions = {
+    origin: '*',
+    methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'UPDATE'],
+    credentials: true
+};
+
 app.configure(function () {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
@@ -33,6 +40,7 @@ app.configure(function () {
     app.use(express.session({ secret: 'ubeat_session_secret' }));
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(cors(corsOptions));
     app.use(app.router);
     app.use(express.static(__dirname + '/public'));
 });
@@ -56,19 +64,20 @@ app.get('/account', ensureAuthenticated, function (req, res) {
 });
 
 app.get('/login', function (req, res) {
+    req.session = req.query.redirectUrl;
     res.render('login', { user: req.user });
 });
 
-app.get('/auth/google',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function (req, res) {
-        res.redirect('/');
-    });
+app.get('/auth/google', function (req, res, next) {
+    req.session.redirect = req.query.redirect;
+    next();
+}, passport.authenticate('google'));
 
 app.get('/auth/google/return',
     passport.authenticate('google', { failureRedirect: '/login' }),
     function (req, res) {
-        res.redirect('/account  ');
+        res.redirect(req.session.redirect || '/');
+        delete req.session.redirect;
     });
 
 app.get('/logout', function (req, res) {

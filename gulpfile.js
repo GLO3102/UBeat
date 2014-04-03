@@ -7,7 +7,7 @@ var gulp = require('gulp')
 var paths = {
     less : './public/stylesheets/**/*.less',
     stylesheets: './public/stylesheets',
-    server: 'index.js'
+    server: ['index.js']
 }
 
 gulp.task('less', function () {
@@ -39,5 +39,7 @@ gulp.task('default', function () {
 });
 
 process.on('exit', function () {
-    if (node) node.kill()
+    if (node) {
+        node.kill();
+    }
 });
