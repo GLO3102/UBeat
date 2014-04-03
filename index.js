@@ -1,27 +1,10 @@
-var express = require('express')
-    , cors = require('cors')
-    , passport = require('passport')
-    , gravatar = require('gravatar')
-    , util = require('util')
-    , GoogleStrategy = require('passport-google').Strategy;
+var express = require('express');
+var cors = require('cors');
+var passport = require('passport');
 
-
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-    done(null, obj);
-});
-
-passport.use(new GoogleStrategy({
-        returnURL: 'http://localhost:3000/auth/google/return',
-        realm: 'http://localhost:3000/'
-    },
-    function (identifier, profile, done) {
-        return done(null, profile);
-    }
-));
+var security = require('./security');
+var login = require('./routes/login');
+var user = require('./routes/user');
 
 var app = express();
 var corsOptions = {
@@ -45,53 +28,13 @@ app.configure(function () {
     app.use(express.static(__dirname + '/public'));
 });
 
-app.get('/', function (req, res) {
-    res.render('login', { user: req.user });
-});
-
-app.get('/account', ensureAuthenticated, function (req, res) {
-    var email = req.user.emails[0].value;
-
-    var data = {
-        user: {
-            name: req.user.displayName,
-            email: email,
-            gravatar: gravatar.url(email, null, https = false)
-        }
-    }
-
-    res.render('account', data);
-});
-
-app.get('/login', function (req, res) {
-    res.render('login', { user: req.user });
-});
-
-app.get('/auth/google', function (req, res, next) {
-    req.session.redirect = req.query.redirect;
-    next();
-}, passport.authenticate('google'));
-
-app.get('/auth/google/return',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function (req, res) {
-        res.redirect(req.session.redirect || '/');
-        delete req.session.redirect;
-    });
-
-app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
-});
+app.get('/', login.login);
+app.get('/login', login.login);
+app.get('/auth/google', login.loginWithGoogle, security.googleAuth);
+app.get('/auth/google/return', security.googleAuth, login.loginWithGoogleCallback);
+app.get('/logout', login.logout);
+app.get('/account', security.isAuthenticated, user.account);
 
 var port = process.env.PORT || 3000;
-app.listen(port, function () {
-    console.log("Listening on " + port);
-});
+app.listen(port);
 
-function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login')
-}
