@@ -6,7 +6,7 @@
     "dependencies": {
         "cors": "~2.2.0",
         "ejs": "~1.0.0",
-        "express": "~3.4.8",
+        "express": "~3.5.1",
         "gravatar": "~1.0.6",
         "passport": "~0.2.0",
         "passport-facebook": "~1.0.3",
