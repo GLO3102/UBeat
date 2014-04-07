@@ -32,6 +32,10 @@ gulp.task('watch', function () {
     gulp.watch(paths.server, ['server']);
 });
 
+gulp.task('build', function() {
+    gulp.run('less');
+})
+
 gulp.task('default', function () {
     gulp.run('less');
     gulp.run('server');
