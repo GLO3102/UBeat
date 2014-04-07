@@ -5,10 +5,6 @@ before_install:
   - npm install -g gulp
 script:
   - gulp build
-after_script:
-  - git remote add heroku git@heroku.com:ubeat.git
-  - git add *
-  - git push heroku master
 deploy:
   provider: heroku
   api_key:
