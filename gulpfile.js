@@ -43,7 +43,6 @@ gulp.task('hook', function () {
 });
 
 gulp.task('default', function () {
-    gulp.run('hook');
     gulp.run('less');
     gulp.run('server');
     gulp.run('watch');
