@@ -1,0 +1,4 @@
+#!/bin/sh
+
+./node_modules/.bin/gulp build
+exit $?

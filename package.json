@@ -17,10 +17,11 @@
         "gulp": "~3.6.0",
         "gulp-concat": "~2.2.0",
         "gulp-less": "~1.2.3",
-        "gulp-nodemon": "~1.0.2"
+        "gulp-symlink": "~0.4.2"
     },
     "scripts": {
-        "test": ""
+        "test": "",
+        "postinstall": "gulp hook"
     },
     "repository": {
         "type": "git",

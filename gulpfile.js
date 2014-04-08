@@ -2,10 +2,11 @@ var gulp = require('gulp')
     , spawn = require('child_process').spawn
     , less = require('gulp-less')
     , concat = require('gulp-concat')
+    , symlink = require('gulp-symlink')
     , node
 
 var paths = {
-    less : './public/stylesheets/**/*.less',
+    less: './public/stylesheets/**/*.less',
     stylesheets: './public/stylesheets',
     server: ['index.js']
 }
@@ -32,11 +33,17 @@ gulp.task('watch', function () {
     gulp.watch(paths.server, ['server']);
 });
 
-gulp.task('build', function() {
-    gulp.run('less');
-})
+gulp.task('build', function () {
+    return gulp.run('less');
+});
+
+gulp.task('hook', function () {
+    return gulp.src('.pre-commit')
+        .pipe(symlink('.git/hooks/', 'pre-commit'));
+});
 
 gulp.task('default', function () {
+    gulp.run('hook');
     gulp.run('less');
     gulp.run('server');
     gulp.run('watch');
