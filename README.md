@@ -9,7 +9,7 @@ Music Library API
 
 ## UBeat hébergé
 
-UBeat sera disponible en version hébergée sur [ubeat.herokuapp.com](http://ubeat.herokuapp.com/).
+UBeat est disponible en version hébergée sur [ubeat.herokuapp.com](http://ubeat.herokuapp.com/).
 
 ##Exécuter UBeat localement
 
