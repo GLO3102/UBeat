@@ -1,15 +1,15 @@
-var gulp = require('gulp')
-    , spawn = require('child_process').spawn
-    , less = require('gulp-less')
-    , concat = require('gulp-concat')
-    , symlink = require('gulp-symlink')
-    , node
+var gulp = require('gulp');
+var spawn = require('child_process').spawn;
+var less = require('gulp-less');
+var concat = require('gulp-concat');
+var symlink = require('gulp-symlink');
+var node;
 
 var paths = {
     less: './public/stylesheets/**/*.less',
     stylesheets: './public/stylesheets',
     server: ['index.js']
-}
+};
 
 gulp.task('less', function () {
     gulp.src(paths.less)
@@ -19,8 +19,10 @@ gulp.task('less', function () {
 });
 
 gulp.task('server', function () {
-    if (node) node.kill()
-    node = spawn('node', paths.server, {stdio: 'inherit'})
+    if (node) {
+        node.kill();
+    }
+    node = spawn('node', paths.server, {stdio: 'inherit'});
     node.on('close', function (code) {
         if (code === 8) {
             gulp.log('Error detected, waiting for changes...');

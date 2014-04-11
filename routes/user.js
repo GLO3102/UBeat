@@ -7,9 +7,9 @@ exports.account = function (req, res) {
         user: {
             name: req.user.displayName,
             email: email,
-            gravatar: gravatar.url(email, null, https = false)
+            gravatar: gravatar.url(email, null, false)
         }
-    }
+    };
 
     res.render('account', data);
-}
+};
