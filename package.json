@@ -11,7 +11,8 @@
         "passport": "~0.2.0",
         "passport-facebook": "~1.0.3",
         "passport-google": "~0.3.0",
-        "passport-local": "~1.0.0"
+        "passport-local": "~1.0.0",
+        "mongoose": "~3.8.8"
     },
     "devDependencies": {
         "gulp": "~3.6.0",

@@ -38,3 +38,21 @@ app.get('/account', security.isAuthenticated, user.account);
 var port = process.env.PORT || 3000;
 app.listen(port);
 
+var mongoose = require('mongoose');
+var mongoUri = process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/test';
+mongoose.connect(mongoUri);
+
+var Cat = mongoose.model('Cat', { name: String });
+
+var kitty = new Cat({ name: 'Zildjian' });
+kitty.save(function (err) {
+    console.log('saved')
+    if (err) // ...
+        console.log('meow');
+});
+
+Cat.findOne({ name: 'Zildjian' }).exec(function(err, cat) {
+    console.log(cat);
+});

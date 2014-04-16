@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var spawn = require('child_process').spawn;
 var less = require('gulp-less');
 var concat = require('gulp-concat');
@@ -25,7 +26,7 @@ gulp.task('server', function () {
     node = spawn('node', paths.server, {stdio: 'inherit'});
     node.on('close', function (code) {
         if (code === 8) {
-            gulp.log('Error detected, waiting for changes...');
+            gutil.log('Error detected, waiting for changes...');
         }
     });
 });
