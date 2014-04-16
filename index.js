@@ -1,4 +1,8 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+
 var cors = require('cors');
 var passport = require('passport');
 
@@ -13,20 +17,15 @@ var corsOptions = {
     credentials: true
 };
 
-app.configure(function () {
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'ejs');
-    app.use(express.logger());
-    app.use(express.cookieParser());
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-    app.use(express.session({ secret: 'ubeat_session_secret' }));
-    app.use(passport.initialize());
-    app.use(passport.session());
-    app.use(cors(corsOptions));
-    app.use(app.router);
-    app.use(express.static(__dirname + '/public'));
-});
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(session({ secret: 'ubeat_session_secret' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(cors(corsOptions));
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', login.login);
 app.get('/login', login.login);
@@ -37,22 +36,3 @@ app.get('/account', security.isAuthenticated, user.account);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
-
-var mongoose = require('mongoose');
-var mongoUri = process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/test';
-mongoose.connect(mongoUri);
-
-var Cat = mongoose.model('Cat', { name: String });
-
-var kitty = new Cat({ name: 'Zildjian' });
-kitty.save(function (err) {
-    console.log('saved')
-    if (err) // ...
-        console.log('meow');
-});
-
-Cat.findOne({ name: 'Zildjian' }).exec(function(err, cat) {
-    console.log(cat);
-});
