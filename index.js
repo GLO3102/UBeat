@@ -20,8 +20,12 @@ var corsOptions = {
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(cookieParser());
-app.use(bodyParser());
-app.use(session({ secret: 'ubeat_session_secret' }));
+app.use(bodyParser.json({ type: 'application/json' }));
+app.use(session({
+    secret: 'ubeat_session_secret',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors(corsOptions));
