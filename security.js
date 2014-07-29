@@ -1,5 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
+var User = require('./models/user.js');
 
 passport.serializeUser(function (user, done) {
     done(null, user);
@@ -14,13 +15,35 @@ passport.use(new GoogleStrategy({
         realm: 'http://localhost:3000/'
     },
     function (identifier, profile, done) {
-        return done(null, profile);
+        var email = profile.emails[0].value;
+        User.findOne({ email: email },
+            function (err, user) {
+                if (err) {
+                    console.log(err);
+                }
+                if (!err && user != null) {
+                    done(null, user);
+                } else {
+                    var user = new User({
+                        email: email,
+                        name: profile.name.givenName + ' ' + profile.name.familyName
+                    });
+                    user.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log('User saved.', user);
+                            done(null, user);
+                        }
+                    });
+                }
+            });
     }
 ));
 
 exports.googleAuth = passport.authenticate('google', { failureRedirect: '/login' });
 
-exports.isAuthenticated = function(req, res, next) {
+exports.isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }

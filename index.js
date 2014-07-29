@@ -6,9 +6,17 @@ var session = require('express-session');
 var cors = require('cors');
 var passport = require('passport');
 
+GLOBAL.mongoose = require('mongoose');
+GLOBAL.Schema = mongoose.Schema;
+var mongoUri = process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/test';
+mongoose.connect(mongoUri);
+
 var security = require('./security');
 var login = require('./routes/login');
 var user = require('./routes/user');
+var search = require('./routes/search');
 
 var app = express();
 var corsOptions = {
@@ -37,6 +45,9 @@ app.get('/auth/google', login.loginWithGoogle, security.googleAuth);
 app.get('/auth/google/return', security.googleAuth, login.loginWithGoogleCallback);
 app.get('/logout', login.logout);
 app.get('/account', security.isAuthenticated, user.account);
+app.get('/search', search.search);
+app.get('/search/album', search.searchByAlbum);
+app.get('/search/artist', search.searchByArtist);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
