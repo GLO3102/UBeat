@@ -1,9 +1,8 @@
-var gravatar = require('gravatar');
 var request = require('request');
 var qs = require('querystring');
 
 exports.search = function (req, res) {
-    search('http://api.deezer.com/search/album?', req.query.q,
+    search('http://api.deezer.com/search?', req.query.q,
         function(response, body) {
             res.status(200).send(body.data);
         },
@@ -14,7 +13,7 @@ exports.search = function (req, res) {
 };
 
 exports.searchByAlbum = function (req, res) {
-    search(url, req.query.q,
+    search('http://api.deezer.com/search/album?', req.query.q,
         function(response, body) {
             res.status(200).send(body.data);
         },
@@ -35,7 +34,7 @@ exports.searchByArtist = function (req, res) {
     );
 };
 
-function search(url, searchQuery, success, error) {
+function search(url, searchQuery, successCallback, errorCallback) {
     url += qs.stringify({
         q: searchQuery
     });
@@ -44,10 +43,10 @@ function search(url, searchQuery, success, error) {
             method: 'GET'
         },
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                success(response, JSON.parse(body))
+            if (!error && response.statusCode === 200) {
+                successCallback(response, JSON.parse(body));
             } else {
-                error(error, response, body);
+                errorCallback(error, response, body);
             }
         }
     );
