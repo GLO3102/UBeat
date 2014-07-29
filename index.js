@@ -6,8 +6,8 @@ var session = require('express-session');
 var cors = require('cors');
 var passport = require('passport');
 
-GLOBAL.mongoose = require('mongoose');
-GLOBAL.Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var mongoUri = process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
     'mongodb://localhost/test';
