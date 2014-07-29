@@ -21,10 +21,10 @@ passport.use(new GoogleStrategy({
                 if (err) {
                     console.log(err);
                 }
-                if (!err && user != null) {
+                if (!err && user !== null) {
                     done(null, user);
                 } else {
-                    var user = new User({
+                    user = new User({
                         email: email,
                         name: profile.name.givenName + ' ' + profile.name.familyName
                     });
