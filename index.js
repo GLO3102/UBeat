@@ -7,7 +7,6 @@ var cors = require('cors');
 var passport = require('passport');
 
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 var mongoUri = process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
     'mongodb://localhost/test';
