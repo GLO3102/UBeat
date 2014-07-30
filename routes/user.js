@@ -43,7 +43,7 @@ exports.findById = function (req, res) {
             }
         } else {
             console.error(err);
-            if (err.name == 'CastError') {
+            if (err.name === 'CastError') {
                 res.status(400).send(err);
             } else {
                 res.status(500).send(err);
