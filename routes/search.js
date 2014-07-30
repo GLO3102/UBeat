@@ -2,30 +2,48 @@ var request = require('request');
 var qs = require('querystring');
 
 exports.search = function (req, res) {
-    search('http://api.deezer.com/search?', req.query.q, res, searchSuccess, searchError);
+    search({
+        url: 'http://api.deezer.com/search?',
+        searchQuery: req.query.q,
+        res: res,
+        successCallback: searchSuccess,
+        errorCallback: searchError
+    });
 };
 
 exports.searchByAlbum = function (req, res) {
-    search('http://api.deezer.com/search/album?', req.query.q, res, searchSuccess, searchError);
+    search({
+        url: 'http://api.deezer.com/search/album?',
+        searchQuery: req.query.q,
+        res: res,
+        successCallback: searchSuccess,
+        errorCallback: searchError
+    });
 };
 
 exports.searchByArtist = function (req, res) {
-    search('http://api.deezer.com/search/album?', req.query.q, res, searchSuccess, searchError);
+    search({
+        url: 'http://api.deezer.com/search/album?',
+        searchQuery: req.query.q,
+        res: res,
+        successCallback: searchSuccess,
+        errorCallback: searchError
+    });
 };
 
-function search(url, searchQuery, res, successCallback, errorCallback) {
-    url += qs.stringify({
-        q: searchQuery
+function search(options) {
+    options.url += qs.stringify({
+        q: options.searchQuery
     });
     request({
-            uri: url,
+            uri: options.url,
             method: 'GET'
         },
         function (error, response, body) {
             if (!error && response.statusCode === 200) {
-                successCallback(res, JSON.parse(body));
+                options.successCallback(options.res, JSON.parse(body));
             } else {
-                errorCallback(res, error, response, body);
+                options.errorCallback(options.res, error, response, body);
             }
         }
     );
