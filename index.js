@@ -7,9 +7,7 @@ var cors = require('cors');
 var passport = require('passport');
 
 var mongoose = require('mongoose');
-var mongoUri = process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/test';
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/ubeat';
 mongoose.connect(mongoUri);
 
 var security = require('./security');
