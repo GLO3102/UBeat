@@ -12,7 +12,8 @@ passport.deserializeUser(function (obj, done) {
 
 passport.use(new GoogleStrategy({
         returnURL: 'http://localhost:3000/auth/google/return',
-        realm: 'http://localhost:3000/'
+        realm: 'http://localhost:3000/',
+        stateless: true
     },
     function (identifier, profile, done) {
         var email = profile.emails[0].value;
