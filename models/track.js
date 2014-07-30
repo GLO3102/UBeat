@@ -24,15 +24,7 @@ var trackSchema = new Schema({
     }
 });
 
-trackSchema.method('toJSON', function () {
-    var obj = this.toObject();
-
-    obj.id = obj._id;
-    delete obj._id;
-    delete obj.__v;
-
-    return obj;
-});
+trackSchema.method('toJSON', modelHelpers.toJSON);
 
 var Track = mongoose.model('Track', trackSchema);
 

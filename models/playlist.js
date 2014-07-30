@@ -7,15 +7,7 @@ var playlistSchema = new Schema({
     tracks: [{ type: Schema.Types.ObjectId, ref: 'Track' }]
 });
 
-playlistSchema.method('toJSON', function () {
-    var obj = this.toObject();
-
-    obj.id = obj._id;
-    delete obj._id;
-    delete obj.__v;
-
-    return obj;
-});
+playlistSchema.method('toJSON', modelHelpers.toJSON);
 
 var Playlist = mongoose.model('Playlist', playlistSchema);
 
