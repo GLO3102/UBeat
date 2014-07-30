@@ -31,7 +31,6 @@ function search(url, searchQuery, successCallback, errorCallback) {
     );
 }
 
-
 function searchSuccess(response, body) {
     res.status(200).send(body.data);
 }

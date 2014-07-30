@@ -41,10 +41,14 @@ app.get('/login', login.login);
 app.get('/auth/google', login.loginWithGoogle, security.googleAuth);
 app.get('/auth/google/return', security.googleAuth, login.loginWithGoogleCallback);
 app.get('/logout', login.logout);
-app.get('/account', security.isAuthenticated, user.account);
 app.get('/search', search.search);
+
 app.get('/search/album', search.searchByAlbum);
 app.get('/search/artist', search.searchByArtist);
+
+app.get('/users', user.allUsers);
+app.get('/users/:id', user.findById);
+app.get('/account', security.isAuthenticated, user.account);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
