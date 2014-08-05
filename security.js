@@ -1,6 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
-var User = require('./models/user.js');
+var User = require('./models/user.js').model;
 
 passport.serializeUser(function (user, done) {
     done(null, user);

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var modelHelpers = require('./modelHelpers.js');
 
 var trackSchema = new Schema({
     title: String,
@@ -28,4 +29,5 @@ trackSchema.method('toJSON', modelHelpers.toJSON);
 
 var Track = mongoose.model('Track', trackSchema);
 
-module.exports = Track;
+exports.schema = trackSchema;
+exports.model = Track;

@@ -9,7 +9,7 @@ var node;
 var paths = {
     less: './public/stylesheets/**/*.less',
     stylesheets: './public/stylesheets',
-    server: ['index.js']
+    server: ['index.js', './models/**/*.js', './routes/**/*.js']
 };
 
 gulp.task('less', function () {

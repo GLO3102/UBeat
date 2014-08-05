@@ -11,4 +11,5 @@ userSchema.method('toJSON', modelHelpers.toJSON);
 
 var User = mongoose.model('User', userSchema);
 
-module.exports = User;
+exports.schema = userSchema;
+exports.model = User;

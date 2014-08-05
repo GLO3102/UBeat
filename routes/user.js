@@ -1,5 +1,5 @@
 var gravatar = require('gravatar');
-var User = require('../models/user.js');
+var User = require('../models/user.js').model;
 
 exports.account = function (req, res) {
     var data = {
@@ -21,8 +21,7 @@ exports.allUsers = function (req, res) {
                     users.push(docs[i].toJSON());
                 }
                 res.status(200).send(users);
-            }
-            else {
+            } else {
                 console.error(err);
                 res.status(500).send(err);
             }

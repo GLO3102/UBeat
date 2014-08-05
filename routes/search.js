@@ -12,7 +12,6 @@ exports.searchByAlbum = function (req, res) {
 
 exports.searchByArtist = function (req, res) {
     search('http://api.deezer.com/search/artist?', req.query.q, res);
-
 };
 
 function search(url, searchQuery, res) {

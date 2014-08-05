@@ -14,6 +14,7 @@ var security = require('./security');
 var login = require('./routes/login');
 var user = require('./routes/user');
 var search = require('./routes/search');
+var playlist = require('./routes/playlists');
 
 var app = express();
 var corsOptions = {
@@ -49,6 +50,9 @@ app.get('/search/artist', search.searchByArtist);
 app.get('/users', user.allUsers);
 app.get('/users/:id', user.findById);
 app.get('/account', security.isAuthenticated, user.account);
+
+app.get('/playlists', playlist.list);
+app.post('/playlists', playlist.create);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
