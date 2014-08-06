@@ -7,7 +7,6 @@ exports.search = function (req, res) {
 
 exports.searchByAlbum = function (req, res) {
     search('http://api.deezer.com/search/album?', req.query.q, res);
-
 };
 
 exports.searchByArtist = function (req, res) {
@@ -23,6 +22,7 @@ function search(url, searchQuery, res) {
             method: 'GET'
         },
         function (error, response, body) {
+            console.log(response, body);
             if (!error && response.statusCode === 200) {
                 searchSuccess(res, JSON.parse(body));
             } else {
