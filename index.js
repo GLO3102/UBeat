@@ -52,8 +52,10 @@ app.get('/users', user.allUsers);
 app.get('/users/:id', user.findById);
 app.get('/account', security.isAuthenticated, user.account);
 
-app.get('/playlists', playlist.list);
+app.get('/playlists', playlist.findAll);
 app.post('/playlists', playlist.create);
+app.get('/playlists/:id', playlist.findById);
+app.put('/playlists/:id', playlist.update);
 
 var port = process.env.PORT || 3000;
 app.listen(port);

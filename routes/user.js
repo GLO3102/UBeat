@@ -9,7 +9,6 @@ exports.account = function (req, res) {
             gravatar: gravatar.url(req.user.email, null, false)
         }
     };
-
     res.render('account', data);
 };
 
@@ -43,7 +42,10 @@ exports.findById = function (req, res) {
         } else {
             console.error(err);
             if (err.name === 'CastError') {
-                res.status(400).send(err);
+                res.status(404).send({
+                    errorCode: 'USER_NOT_FOUND',
+                    message: 'User ' + req.params.id + ' was not found'
+                });
             } else {
                 res.status(500).send(err);
             }
