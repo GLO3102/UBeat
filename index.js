@@ -46,6 +46,7 @@ app.get('/search', search.search);
 
 app.get('/search/album', search.searchByAlbum);
 app.get('/search/artist', search.searchByArtist);
+app.get('/search/track', search.searchByTrack);
 
 app.get('/users', user.allUsers);
 app.get('/users/:id', user.findById);
