@@ -22,7 +22,7 @@ function search(url, searchQuery, res) {
             method: 'GET'
         },
         function (error, response, body) {
-            console.log(response, body);
+            console.log(JSON.stringify(response), JSON.stringify(body));
             if (!error && response.statusCode === 200) {
                 searchSuccess(res, JSON.parse(body));
             } else {
