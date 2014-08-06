@@ -19,7 +19,8 @@ exports.searchByTrack = function (req, res) {
 
 function search(url, searchQuery, res) {
     url += qs.stringify({
-        q: searchQuery
+        q: searchQuery,
+        access_token: 'nyeLL0j9d953e221bcbee5flp77Zqu553e221bcbee98mkAWOsT'
     });
     request({
             uri: url,
