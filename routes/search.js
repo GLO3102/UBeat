@@ -1,33 +1,47 @@
 var request = require('request');
 var qs = require('querystring');
 
+var searchEndPoint = 'http://itunes.apple.com/search?';
+
 exports.search = function (req, res) {
-    search('http://api.deezer.com/search?', req.query.q, res);
+    search({
+        term: req.query.q,
+        limit: req.query.limit || 10
+    }, res);
 };
 
 exports.searchByAlbum = function (req, res) {
-    search('http://api.deezer.com/search/album?', req.query.q, res);
+    search({
+        term: req.query.q,
+        entity: 'album',
+        limit: req.query.limit || 10
+    }, res);
 };
 
 exports.searchByArtist = function (req, res) {
-    search('http://api.deezer.com/search/artist?', req.query.q, res);
+    search({
+        term: req.query.q,
+        entity: 'musicArtist',
+        limit: req.query.limit || 10
+    }, res);
 };
 
 exports.searchByTrack = function (req, res) {
-    search('http://api.deezer.com/search/track?', req.query.q, res);
+    search({
+        term: req.query.q,
+        entity: 'song',
+        limit: req.query.limit || 10
+    }, res);
 };
 
-function search(url, searchQuery, res) {
-    url += qs.stringify({
-        q: searchQuery,
-        access_token: 'nyeLL0j9d953e221bcbee5flp77Zqu553e221bcbee98mkAWOsT'
-    });
+function search(parameters, res) {
+    var url = searchEndPoint + qs.stringify(parameters);
+    console.log(url);
     request({
             uri: url,
             method: 'GET'
         },
         function (error, response, body) {
-            console.log(JSON.stringify(response), JSON.stringify(body));
             if (!error && response.statusCode === 200) {
                 searchSuccess(res, JSON.parse(body));
             } else {
@@ -38,7 +52,7 @@ function search(url, searchQuery, res) {
 }
 
 function searchSuccess(res, body) {
-    res.status(200).send(body.data);
+    res.status(200).send(body);
 }
 
 function searchError(res, error, response, body) {

@@ -21,8 +21,32 @@ exports.createPlaylist = function (req, res) {
     });
 };
 
-exports.addTrack = function (req, res) {
-  Playlist.find()
+exports.updatePlaylist = function (req, res) {
+    Playlist.findPlaylistById(req.params.id, function (err, playlist) {
+        if (!err) {
+            if (playlist) {
+                console.log(req.body.tracks);
+                playlist.tracks = req.body.tracks;
+                playlist.save();
+                res.status(200).send(playlist);
+            } else {
+                res.status(404).send({
+                    errorCode: 'PLAYLIST_NOT_FOUND',
+                    message: 'Playlist ' + req.params.id + ' was not found'
+                });
+            }
+        } else {
+            console.error(err);
+            if (err.name === 'CastError') {
+                res.status(404).send({
+                    errorCode: 'PLAYLIST_NOT_FOUND',
+                    message: 'Playlist ' + req.params.id + ' was not found'
+                });
+            } else {
+                res.status(500).send(err);
+            }
+        }
+    });
 };
 
 exports.getPlaylists = function (req, res) {
