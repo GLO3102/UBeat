@@ -14,6 +14,7 @@ var security = require('./security');
 var login = require('./routes/login');
 var user = require('./routes/user');
 var search = require('./routes/search');
+var lookup = require('./routes/lookup');
 var playlist = require('./routes/playlists');
 
 var app = express();
@@ -52,6 +53,9 @@ app.get('/users', user.allUsers);
 app.get('/users/:id', user.findById);
 app.get('/account', security.isAuthenticated, user.account);
 
+app.get('/album/:id', lookup.getAlbum);
+app.get('/album/:id/tracks', lookup.getAlbumTracks);
+app.get('/artist/:id', lookup.getArtist);
 app.get('/playlists', playlist.getPlaylists);
 app.post('/playlists', playlist.createPlaylist);
 app.get('/playlists/:id', playlist.findPlaylistById);
