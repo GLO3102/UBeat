@@ -5,14 +5,14 @@ var searchEndPoint = 'http://itunes.apple.com/search?';
 var lookupEndPoint = 'http://itunes.apple.com/lookup?';
 
 exports.search = function (parameters, res) {
-    queryItunesApi(searchEndPoint + qs.stringify(parameters));
+    queryItunesApi(searchEndPoint + qs.stringify(parameters), res);
 };
 
 exports.lookup = function (parameters, res) {
-    queryItunesApi(lookupEndPoint + qs.stringify(parameters));
+    queryItunesApi(lookupEndPoint + qs.stringify(parameters), res);
 };
 
-function queryItunesApi(url) {
+function queryItunesApi(url, res) {
     console.log(url);
     request({
             uri: url,
