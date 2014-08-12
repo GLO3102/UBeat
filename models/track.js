@@ -3,26 +3,32 @@ var Schema = mongoose.Schema;
 var modelHelpers = require('./modelHelpers.js');
 
 var trackSchema = new Schema({
-    title: String,
-    link: String,
-    duration: Number,
-    rank: Number,
-    preview: String,
-    artist: {
-        id: Number,
-        name: String,
-        link: String,
-        picture: String,
-        tracklist: String,
-        type: String
-    },
-    album: {
-        id: Number,
-        title: String,
-        cover: String,
-        tracklist: String,
-        type: String
-    }
+    artistId: Number,
+    collectionId: Number,
+    trackId: Number,
+    artistName: String,
+    collectionName: String,
+    trackName: String,
+    collectionCensoredName: String,
+    trackCensoredName: String,
+    artistViewUrl: String,
+    collectionViewUrl: String,
+    trackViewUrl: String,
+    previewUrl: String,
+    artworkUrl30: String,
+    artworkUrl60: String,
+    artworkUrl100: String,
+    collectionPrice: Number,
+    trackPrice: Number,
+    releaseDate: Date,
+    discCount: Number,
+    discNumber: Number,
+    trackCount: Number,
+    trackNumber: Number,
+    trackTimeMillis: Number,
+    country: String,
+    currency: String,
+    primaryGenreName: String
 });
 
 trackSchema.method('toJSON', modelHelpers.toJSON);

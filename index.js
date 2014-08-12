@@ -58,6 +58,8 @@ app.get('/album/:id/tracks', lookup.getAlbumTracks);
 app.get('/artist/:id', lookup.getArtist);
 app.get('/playlists', playlist.getPlaylists);
 app.post('/playlists', playlist.createPlaylist);
+app.post('/playlists/:id/tracks', playlist.addTrackToPlaylist);
+app.delete('/playlists/:playlistId/tracks/:trackId', playlist.removeTrackFromPlaylist);
 app.get('/playlists/:id', playlist.findPlaylistById);
 app.put('/playlists/:id', playlist.updatePlaylist);
 
