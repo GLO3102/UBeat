@@ -36,7 +36,7 @@ exports.addTrackToPlaylist = function (req, res) {
                     res.status(412).send({
                         errorCode: 'REQUEST_BODY_REQUIRED',
                         message: 'Request body is missing'
-                    })
+                    });
                 }
             } else {
                 res.status(404).send({
