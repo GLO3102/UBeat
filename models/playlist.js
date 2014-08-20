@@ -7,7 +7,11 @@ var userSchema = require('./user').schema;
 
 var playlistSchema = new Schema({
     name: String,
-    owner: [userSchema],
+    owner: {
+        id: String,
+        email: String,
+        name: String
+    },
     tracks: [trackSchema]
 });
 

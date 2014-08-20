@@ -4,11 +4,11 @@ var Track = require('../models/track').model;
 var _ = require('underscore');
 
 exports.createPlaylist = function (req, res) {
-    User.findById('53d847f8bc75352a1c04dcd9', function (err, user) {
+    User.findById(req.user.id, function (err, user) {
         if (!err) {
             var playlist = new Playlist({
                 name: req.body.name,
-                owner: user
+                owner: user.toJSON()
             });
             playlist.save(function (err) {
                 if (!err) {
@@ -29,14 +29,14 @@ exports.addTrackToPlaylist = function (req, res) {
             if (playlist) {
                 if (req.body) {
                     var track = new Track(req.body);
-                    playlist.tracks.push(track);
+                    playlist.tracks.push(track.toJSON());
                     playlist.save();
                     res.status(200).send(playlist);
                 } else {
                     res.status(412).send({
                         errorCode: 'REQUEST_BODY_REQUIRED',
                         message: 'Request body is missing'
-                    })
+                    });
                 }
             } else {
                 res.status(404).send({
