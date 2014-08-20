@@ -21,13 +21,15 @@
     "underscore": "~1.6.0",
     "moment": "~2.8.1",
     "jwt-simple": "~0.2.0",
-    "bcrypt-nodejs": "0.0.3"
+    "bcrypt-nodejs": "0.0.3",
+    "connect-flash": "~0.1.1"
   },
   "devDependencies": {
     "gulp": "~3.6.0",
     "gulp-concat": "~2.2.0",
     "gulp-less": "~1.2.3",
-    "gulp-symlink": "~0.4.2"
+    "gulp-symlink": "~0.4.2",
+    "gulp-util": "~3.0.0"
   },
   "scripts": {
     "test": ""
