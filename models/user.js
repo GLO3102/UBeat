@@ -10,7 +10,18 @@ var userSchema = new mongoose.Schema({
     expiration: Number
 });
 
-userSchema.methods.toJSON = modelHelpers.toJSON;
+userSchema.methods.toJSON = function() {
+    var obj = this.toObject();
+
+    obj.id = obj._id;
+    delete obj._id;
+    delete obj.__v;
+    delete obj.token;
+    delete obj.password;
+    delete obj.expiration;
+
+    return obj;
+};
 userSchema.methods.generateHash = function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };

@@ -52,3 +52,31 @@ exports.findById = function (req, res) {
         }
     });
 };
+
+exports.findByName = function (req, res) {
+    var name = req.query.q;
+    User.findOne({
+        name: new RegExp(name, 'i')
+    }, function (err, user) {
+        if (!err) {
+            if (user) {
+                res.status(200).send(user);
+            } else {
+                res.status(404).send({
+                    errorCode: 'USER_NOT_FOUND',
+                    message: 'User ' + req.params.id + ' was not found'
+                });
+            }
+        } else {
+            console.error(err);
+            if (err.name === 'CastError') {
+                res.status(404).send({
+                    errorCode: 'USER_NOT_FOUND',
+                    message: 'User ' + req.params.id + ' was not found'
+                });
+            } else {
+                res.status(500).send(err);
+            }
+        }
+    });
+};

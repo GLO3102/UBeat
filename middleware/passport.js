@@ -52,7 +52,6 @@ module.exports = function (passport, app) {
                     });
                 });
             });
-
         }));
 
     passport.use('local-signup', new LocalStrategy({
@@ -64,7 +63,6 @@ module.exports = function (passport, app) {
             if (email) {
                 email = email.toLowerCase();
             }
-
 
             process.nextTick(function () {
                 if (!req.user) {

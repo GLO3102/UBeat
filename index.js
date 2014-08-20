@@ -12,6 +12,8 @@ var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/ubeat';
 mongoose.connect(mongoUri);
 
 var authentication = require('./middleware/authentication');
+var login = require('./routes/login');
+var signup = require('./routes/signup');
 var user = require('./routes/user');
 var search = require('./routes/search');
 var lookup = require('./routes/lookup');
@@ -46,87 +48,35 @@ app.use(flash());
 app.use(cors(corsOptions));
 app.use(express.static(__dirname + '/public'));
 
-/*
- app.get('/', authentication.home);
- app.get('/login', login.login);
- app.get('/auth/google', login.loginWithGoogle, security.googleAuth);
- app.get('/auth/google/return', security.googleAuth, login.loginWithGoogleCallback);
- app.get('/logout', login.logout);
- */
+app.get('/login', login.showLoginPage);
+app.post('/login', login.passportLogin);
+app.get('/logout', login.logout);
 
-app.get('/search', search.search);
-app.get('/search/album', search.searchByAlbum);
-app.get('/search/artist', search.searchByArtist);
-app.get('/search/track', search.searchByTrack);
+app.get('/signup', signup.showSignupPage);
+app.post('/signup', signup.passportSignup);
+app.get('/welcome', signup.welcome);
 
-app.get('/users', user.allUsers);
-app.get('/users/:id', user.findById);
-//app.get('/account', security.isAuthenticated, user.account);
+app.get('/token', login.getToken);
+app.get('/tokenInfo', authentication.isAuthenticated, login.getToken);
 
-app.get('/album/:id', lookup.getAlbum);
-app.get('/album/:id/tracks', lookup.getAlbumTracks);
-app.get('/artist/:id', lookup.getArtist);
-app.get('/playlists', playlist.getPlaylists);
-app.post('/playlists', playlist.createPlaylist);
-app.post('/playlists/:id/tracks', playlist.addTrackToPlaylist);
-app.delete('/playlists/:playlistId/tracks/:trackId', playlist.removeTrackFromPlaylist);
-app.get('/playlists/:id', playlist.findPlaylistById);
-app.put('/playlists/:id', playlist.updatePlaylist);
+app.get('/search', authentication.isAuthenticated, search.search);
+app.get('/search/album', authentication.isAuthenticated, search.searchByAlbum);
+app.get('/search/artist', authentication.isAuthenticated, search.searchByArtist);
+app.get('/search/track', authentication.isAuthenticated, search.searchByTrack);
+app.get('/search/users', authentication.isAuthenticated, user.findByName);
 
+app.get('/users', authentication.isAuthenticated, user.allUsers);
+app.get('/users/:id', authentication.isAuthenticated, user.findById);
 
-app.get('/login', function (req, res) {
-    res.render('login.ejs', { message: req.flash('loginMessage') });
-});
-
-app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/token',
-    failureRedirect: '/login',
-    failureFlash: true
-}));
-
-app.get('/token', function(req, res) {
-    res.send(req.user);
-});
-
-app.get('/tokenInfo', authentication.isAuthenticated, function(req, res) {
-    res.send(req.user);
-});
-
-app.get('/signup', function (req, res) {
-    res.render('signup.ejs', { message: req.flash('signupMessage') });
-});
-
-
-app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/welcome',
-    failureRedirect: '/signup',
-    failureFlash: true
-}));
-
-app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/login');
-});
-
-app.get('/welcome', function (req, res) {
-    if (req.user) {
-        res.status(200).send({
-            message: 'USER_SIGNED_UP_SUCCESSFULLY',
-            user: {
-                id: req.user._id,
-                email : req.user.email,
-                name: req.user.name
-            }
-        });
-    }
-});
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-}
+app.get('/album/:id', authentication.isAuthenticated, lookup.getAlbum);
+app.get('/album/:id/tracks', authentication.isAuthenticated, lookup.getAlbumTracks);
+app.get('/artist/:id', authentication.isAuthenticated, lookup.getArtist);
+app.get('/playlists', authentication.isAuthenticated, playlist.getPlaylists);
+app.post('/playlists', authentication.isAuthenticated, playlist.createPlaylist);
+app.post('/playlists/:id/tracks', authentication.isAuthenticated, playlist.addTrackToPlaylist);
+app.delete('/playlists/:playlistId/tracks/:trackId', authentication.isAuthenticated, playlist.removeTrackFromPlaylist);
+app.get('/playlists/:id', authentication.isAuthenticated, playlist.findPlaylistById);
+app.put('/playlists/:id', authentication.isAuthenticated, playlist.updatePlaylist);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
