@@ -18,4 +18,4 @@ Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki
 
 ## Documentation de l'API
 
-À venir
+Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/API)
