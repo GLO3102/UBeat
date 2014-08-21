@@ -60,17 +60,17 @@ app.get('/token', login.getToken);
 app.get('/tokenInfo', authentication.isAuthenticated, login.getToken);
 
 app.get('/search', authentication.isAuthenticated, search.search);
-app.get('/search/album', authentication.isAuthenticated, search.searchByAlbum);
-app.get('/search/artist', authentication.isAuthenticated, search.searchByArtist);
-app.get('/search/track', authentication.isAuthenticated, search.searchByTrack);
+app.get('/search/albums', authentication.isAuthenticated, search.searchByAlbum);
+app.get('/search/artists', authentication.isAuthenticated, search.searchByArtist);
+app.get('/search/tracks', authentication.isAuthenticated, search.searchByTrack);
 app.get('/search/users', authentication.isAuthenticated, user.findByName);
 
 app.get('/users', authentication.isAuthenticated, user.allUsers);
 app.get('/users/:id', authentication.isAuthenticated, user.findById);
 
-app.get('/album/:id', authentication.isAuthenticated, lookup.getAlbum);
-app.get('/album/:id/tracks', authentication.isAuthenticated, lookup.getAlbumTracks);
-app.get('/artist/:id', authentication.isAuthenticated, lookup.getArtist);
+app.get('/albums/:id', authentication.isAuthenticated, lookup.getAlbum);
+app.get('/albums/:id/tracks', authentication.isAuthenticated, lookup.getAlbumTracks);
+app.get('/artists/:id', authentication.isAuthenticated, lookup.getArtist);
 app.get('/playlists', authentication.isAuthenticated, playlist.getPlaylists);
 app.post('/playlists', authentication.isAuthenticated, playlist.createPlaylist);
 app.post('/playlists/:id/tracks', authentication.isAuthenticated, playlist.addTrackToPlaylist);
