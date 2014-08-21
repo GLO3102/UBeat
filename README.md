@@ -14,8 +14,8 @@ UBeat est disponible en version hébergée sur [ubeat.herokuapp.com](https://ube
 
 ##Exécuter UBeat localement
 
-Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/Installation-Ubeat)
+Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/1-Installation-Ubeat)
 
 ## Documentation de l'API
 
-Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/API)
+Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/2-API)
