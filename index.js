@@ -18,6 +18,7 @@ var user = require('./routes/user');
 var search = require('./routes/search');
 var lookup = require('./routes/lookup');
 var playlist = require('./routes/playlists');
+var status = require('./routes/status');
 
 var app = express();
 var corsOptions = {
@@ -48,6 +49,7 @@ app.use(flash());
 app.use(cors(corsOptions));
 app.use(express.static(__dirname + '/public'));
 
+app.get('/status', status.getStatus);
 app.get('/login', login.showLoginPage);
 app.post('/login', login.passportLogin);
 app.get('/logout', login.logout);
