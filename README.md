@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/wfortin/UBeat.svg?branch=master)](https://travis-ci.org/wfortin/UBeat)
-[![Dependency Status](https://david-dm.org/wfortin/ubeat.svg)](https://david-dm.org/wfortin/ubeat)
+[![Build Status](https://travis-ci.org/GLO3102/UBeat.svg?branch=master)](https://travis-ci.org/GLO3102/UBeat)
+[![Dependency Status](https://david-dm.org/glo3102/ubeat.svg)](https://david-dm.org/GLO3102/UBeat)
 [![Code Climate](https://codeclimate.com/github/wfortin/UBeat.png)](https://codeclimate.com/github/wfortin/UBeat)
 
 #UBeat
