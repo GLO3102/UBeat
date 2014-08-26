@@ -99,10 +99,45 @@ exports.updatePlaylist = function (req, res) {
     Playlist.findById(req.params.id, function (err, playlist) {
         if (!err) {
             if (playlist) {
-                console.log(req.body.tracks);
                 playlist.tracks = _.extend(playlist.tracks, req.body.tracks);
                 playlist.save();
                 res.status(200).send(playlist);
+            } else {
+                res.status(404).send({
+                    errorCode: 'PLAYLIST_NOT_FOUND',
+                    message: 'Playlist ' + req.params.id + ' was not found'
+                });
+            }
+        } else {
+            console.error(err);
+            if (err.name === 'CastError') {
+                res.status(404).send({
+                    errorCode: 'PLAYLIST_NOT_FOUND',
+                    message: 'Playlist ' + req.params.id + ' was not found'
+                });
+            } else {
+                res.status(500).send(err);
+            }
+        }
+    });
+};
+
+exports.removePlaylist = function (req, res) {
+    Playlist.findById(req.params.id, function (err, playlist) {
+        if (!err) {
+            if (playlist) {
+                if(playlist.owner.id == req.user.id) {
+                    playlist.remove();
+                    res.status(200).send({
+                        message: 'Playlist ' + req.params.id + ' deleted successfully'
+                    });
+                }
+                else {
+                    res.status(412).send({
+                        errorCode: 'NOT_PLAYLIST_OWNER',
+                        message: 'Playlist can only be deleted by their owner'
+                    });
+                }
             } else {
                 res.status(404).send({
                     errorCode: 'PLAYLIST_NOT_FOUND',

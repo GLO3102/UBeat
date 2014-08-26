@@ -1,23 +1,11 @@
-var gravatar = require('gravatar');
 var User = require('../models/user.js').model;
-
-exports.account = function (req, res) {
-    var data = {
-        user: {
-            name: req.user.name,
-            email: req.user.email,
-            gravatar: gravatar.url(req.user.email, null, false)
-        }
-    };
-    res.render('account', data);
-};
 
 exports.allUsers = function (req, res) {
     User.find({}, function (err, docs) {
             if (!err) {
                 var users = [];
                 for (var i = 0; i < docs.length; i++) {
-                    users.push(docs[i].toJSON());
+                    users.push(docs[i].toDTO());
                 }
                 res.status(200).send(users);
             } else {
@@ -32,7 +20,7 @@ exports.findById = function (req, res) {
     User.findById(req.params.id, function (err, user) {
         if (!err) {
             if (user) {
-                res.status(200).send(user);
+                res.status(200).send(user.toDTO(true));
             } else {
                 res.status(404).send({
                     errorCode: 'USER_NOT_FOUND',
@@ -55,12 +43,16 @@ exports.findById = function (req, res) {
 
 exports.findByName = function (req, res) {
     var name = req.query.q;
-    User.findOne({
+    User.find({
         name: new RegExp(name, 'i')
-    }, function (err, user) {
+    }, function (err, users) {
         if (!err) {
-            if (user) {
-                res.status(200).send(user);
+            if (users) {
+                var formattedUsers = [];
+                for (var i = 0; i < users.length; i++) {
+                    formattedUsers.push(users[i].toDTO(true));
+                }
+                res.status(200).send(formattedUsers);
             } else {
                 res.status(404).send({
                     errorCode: 'USER_NOT_FOUND',
@@ -79,4 +71,34 @@ exports.findByName = function (req, res) {
             }
         }
     });
+};
+
+exports.follow = function (req, res) {
+    User.findById(req.body.id, function (err, userToFollow) {
+        if (!err) {
+            if (!req.user.isFollowingUser(userToFollow.id)) {
+                req.user.following.push(userToFollow.toDTO(false));
+                req.user.save(function (err) {
+                    if (!err) {
+                        res.status(201).send(req.user.toDTO(true));
+                    } else {
+                        console.error(err);
+                    }
+                });
+            } else {
+                res.status(412).send({
+                    errorCode: 'ALREADY_FOLLOWING_USER',
+                    message: 'You already follow user ' + req.body.id
+                });
+            }
+        } else {
+            console.error(err);
+        }
+    });
+};
+
+exports.unfollow = function (req, res) {
+    req.user.unfollow(req.params.id);
+    req.user.save();
+    res.status(200).send(req.user.toDTO(true));
 };
