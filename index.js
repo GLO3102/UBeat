@@ -51,7 +51,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/status', status.getStatus);
 app.get('/login', login.showLoginPage);
-app.post('/login', login.passportLogin);
+app.post('/login', passport.authenticate('local-login'), login.getToken);
 app.get('/logout', login.logout);
 
 app.get('/signup', signup.showSignupPage);
