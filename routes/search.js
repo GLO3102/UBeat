@@ -4,6 +4,7 @@ exports.search = function (req, res) {
     itunes.search({
         term: req.query.q,
         media: 'music',
+        entity: 'album,musicArtist,song', 
         limit: req.query.limit || 10
     }, res);
 };
