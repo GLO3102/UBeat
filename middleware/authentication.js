@@ -30,7 +30,7 @@ exports.isAuthenticated = function (req, res, next) {
                 }
             });
         } catch (err) {
-            return res.status(500).send({
+            return res.status(401).send({
                 errorCode: 'ACCESS_DENIED',
                 message: 'Error retrieving user associated with token'
             });
