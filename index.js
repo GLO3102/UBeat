@@ -110,7 +110,7 @@ app.delete('/unsecure/playlists/:id', playlist.removePlaylist);
 app.post('/unsecure/playlists/:id/tracks', playlist.addTrackToPlaylist);
 app.delete('/unsecure/playlists/:playlistId/tracks/:trackId', playlist.removeTrackFromPlaylist);
 app.get('/unsecure/playlists/:id', playlist.findPlaylistById);
-app.put('/unsecure/playlists/:id, playlist.updatePlaylist);
+app.put('/unsecure/playlists/:id', playlist.updatePlaylist);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
