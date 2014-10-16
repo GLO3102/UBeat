@@ -61,6 +61,8 @@ app.get('/welcome', signup.welcome);
 app.get('/token', login.getToken);
 app.get('/tokenInfo', authentication.isAuthenticated, login.getToken);
 
+
+// Secure API 
 app.get('/search', authentication.isAuthenticated, search.search);
 app.get('/search/albums', authentication.isAuthenticated, search.searchByAlbum);
 app.get('/search/artists', authentication.isAuthenticated, search.searchByArtist);
@@ -84,6 +86,31 @@ app.post('/playlists/:id/tracks', authentication.isAuthenticated, playlist.addTr
 app.delete('/playlists/:playlistId/tracks/:trackId', authentication.isAuthenticated, playlist.removeTrackFromPlaylist);
 app.get('/playlists/:id', authentication.isAuthenticated, playlist.findPlaylistById);
 app.put('/playlists/:id', authentication.isAuthenticated, playlist.updatePlaylist);
+
+// Unsecure API (Will be removed after release 2)
+app.get('/unsecure/search', search.search);
+app.get('/unsecure/search/albums', search.searchByAlbum);
+app.get('/unsecure/search/artists', search.searchByArtist);
+app.get('/unsecure/search/tracks', search.searchByTrack);
+app.get('/unsecure/search/users', user.findByName);
+
+app.get('/unsecure/users', user.allUsers);
+app.get('/unsecure/users/:id', user.findById);
+
+app.post('/unsecure/follow', user.follow);
+app.delete('/unsecure/follow/:id', user.unfollow);
+
+app.get('/unsecure/albums/:id', lookup.getAlbum);
+app.get('/unsecure/albums/:id/tracks', lookup.getAlbumTracks);
+app.get('/unsecure/artists/:id', lookup.getArtist);
+app.get('/unsecure/artists/:id/albums', lookup.getArtistAlbums);
+app.get('/unsecure/playlists', playlist.getPlaylists);
+app.post('/unsecure/playlists', playlist.createPlaylist);
+app.delete('/unsecure/playlists/:id', playlist.removePlaylist);
+app.post('/unsecure/playlists/:id/tracks', playlist.addTrackToPlaylist);
+app.delete('/unsecure/playlists/:playlistId/tracks/:trackId', playlist.removeTrackFromPlaylist);
+app.get('/unsecure/playlists/:id', playlist.findPlaylistById);
+app.put('/unsecure/playlists/:id, playlist.updatePlaylist);
 
 var port = process.env.PORT || 3000;
 app.listen(port);
