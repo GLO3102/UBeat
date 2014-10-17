@@ -8,11 +8,11 @@ exports.search = function (parameters, res) {
     queryItunesApi(searchEndPoint + qs.stringify(parameters), res);
 };
 
-exports.lookup = function (parameters, res) {
-    queryItunesApi(lookupEndPoint + qs.stringify(parameters), res);
+exports.lookup = function (parameters, res, amount) {
+    queryItunesApi(lookupEndPoint + qs.stringify(parameters), res, amount);
 };
 
-function queryItunesApi(url, res) {
+function queryItunesApi(url, res, amount) {
     console.log(url);
     request({
             uri: url,
@@ -20,7 +20,7 @@ function queryItunesApi(url, res) {
         },
         function (error, response, body) {
             if (!error && response.statusCode === 200) {
-                successCallback(res, JSON.parse(body));
+                successCallback(res, JSON.parse(body), amount);
             } else {
                 errorCallback(res, error, response, body);
             }
@@ -29,8 +29,15 @@ function queryItunesApi(url, res) {
 }
 
 
-function successCallback(res, body) {
-    res.status(200).send(body);
+function successCallback(res, body, amount) {
+    if (amount == 'many') {
+        body.results.splice(0,1);
+        body.resultCount--;
+        res.status(200).send(body);
+    }
+    else {
+        res.status(200).send(body);
+    }
 }
 
 function errorCallback(res, error, response, body) {
