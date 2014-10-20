@@ -4,26 +4,26 @@ exports.getAlbum = function (req, res) {
     itunes.lookup({
         id: req.params.id,
         entity: 'album'
-    }, res);
+    }, res, 'single');
 };
 
 exports.getAlbumTracks = function (req, res) {
     itunes.lookup({
         id: req.params.id,
         entity: 'song'
-    }, res);
+    }, res, 'many');
 };
 
 exports.getArtist = function (req, res) {
     itunes.lookup({
         id: req.params.id,
         entity: 'musicArtist'
-    }, res);
+    }, res, 'single');
 };
 
 exports.getArtistAlbums = function (req, res) {
     itunes.lookup({
         id: req.params.id,
         entity: 'album'
-    }, res);
+    }, res, 'many');
 };
