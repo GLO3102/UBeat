@@ -23,7 +23,7 @@ var status = require('./routes/status');
 var app = express();
 var corsOptions = {
     origin: '*',
-    methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETEx', 'UPDATE'],
+    methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'UPDATE'],
     credentials: true
 };
 
