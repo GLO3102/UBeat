@@ -55,7 +55,7 @@ app.post('/login', passport.authenticate('local-login'), login.getToken);
 app.get('/logout', login.logout);
 
 app.get('/signup', signup.showSignupPage);
-app.post('/signup', signup.passportSignup);
+app.post('/signup', passport.authenticate('local-signup'), login.getToken);
 app.get('/welcome', signup.welcome);
 
 app.get('/token', login.getToken);
