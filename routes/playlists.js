@@ -23,6 +23,27 @@ exports.createPlaylist = function (req, res) {
     });
 };
 
+// Unsecure (Will be removed after release 2)
+exports.createPlaylistUnsecure = function (req, res) {
+    User.findById(req.user.id, function (err, user) {
+        if (!err) {
+            var playlist = new Playlist({
+                name: req.body.name,
+                owner: req.body.owner.name
+            });
+            playlist.save(function (err) {
+                if (!err) {
+                    res.status(201).send(playlist);
+                } else {
+                    console.error(err);
+                }
+            });
+        } else {
+            console.error(err);
+        }
+    });
+};
+
 exports.addTrackToPlaylist = function (req, res) {
     Playlist.findById(req.params.id, function (err, playlist) {
         if (!err) {
