@@ -25,19 +25,13 @@ exports.createPlaylist = function (req, res) {
 
 // Unsecure (Will be removed after release 2)
 exports.createPlaylistUnsecure = function (req, res) {
-    User.findById(req.user.id, function (err, user) {
+    var playlist = new Playlist({
+        name: req.body.name,
+        owner: req.body.owner
+    });
+    playlist.save(function (err) {
         if (!err) {
-            var playlist = new Playlist({
-                name: req.body.name,
-                owner: req.body.owner
-            });
-            playlist.save(function (err) {
-                if (!err) {
-                    res.status(201).send(playlist);
-                } else {
-                    console.error(err);
-                }
-            });
+            res.status(201).send(playlist);
         } else {
             console.error(err);
         }
@@ -159,6 +153,35 @@ exports.removePlaylist = function (req, res) {
                         message: 'Playlist can only be deleted by their owner'
                     });
                 }
+            } else {
+                res.status(404).send({
+                    errorCode: 'PLAYLIST_NOT_FOUND',
+                    message: 'Playlist ' + req.params.id + ' was not found'
+                });
+            }
+        } else {
+            console.error(err);
+            if (err.name === 'CastError') {
+                res.status(404).send({
+                    errorCode: 'PLAYLIST_NOT_FOUND',
+                    message: 'Playlist ' + req.params.id + ' was not found'
+                });
+            } else {
+                res.status(500).send(err);
+            }
+        }
+    });
+};
+
+// Unsecure (Will be removed after release 2)
+exports.removePlaylistUnsecure = function (req, res) {
+    Playlist.findById(req.params.id, function (err, playlist) {
+        if (!err) {
+            if (playlist) {
+                playlist.remove();
+                res.status(200).send({
+                    message: 'Playlist ' + req.params.id + ' deleted successfully'
+                });
             } else {
                 res.status(404).send({
                     errorCode: 'PLAYLIST_NOT_FOUND',
