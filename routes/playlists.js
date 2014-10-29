@@ -29,7 +29,7 @@ exports.createPlaylistUnsecure = function (req, res) {
         if (!err) {
             var playlist = new Playlist({
                 name: req.body.name,
-                owner: req.body.owner.name
+                owner: req.body.owner
             });
             playlist.save(function (err) {
                 if (!err) {
