@@ -36,5 +36,5 @@ exports.getToken = function (req, res) {
 exports.logout = function (req, res) {
     req.session.destroy();
     req.logout();
-    res.redirect('/login');
+    res.status(200).send();
 };
