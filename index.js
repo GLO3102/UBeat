@@ -106,7 +106,7 @@ app.get('/unsecure/artists/:id', lookup.getArtist);
 app.get('/unsecure/artists/:id/albums', lookup.getArtistAlbums);
 app.get('/unsecure/playlists', playlist.getPlaylists);
 app.post('/unsecure/playlists', playlist.createPlaylistUnsecure);
-app.delete('/unsecure/playlists/:id', playlist.removePlaylist);
+app.delete('/unsecure/playlists/:id', playlist.removePlaylistUnsecure);
 app.post('/unsecure/playlists/:id/tracks', playlist.addTrackToPlaylist);
 app.delete('/unsecure/playlists/:playlistId/tracks/:trackId', playlist.removeTrackFromPlaylist);
 app.get('/unsecure/playlists/:id', playlist.findPlaylistById);
