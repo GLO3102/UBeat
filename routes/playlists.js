@@ -114,6 +114,7 @@ exports.updatePlaylist = function (req, res) {
     Playlist.findById(req.params.id, function (err, playlist) {
         if (!err) {
             if (playlist) {
+                playlist.name = req.body.name;
                 playlist.tracks = _.extend(playlist.tracks, req.body.tracks);
                 playlist.save();
                 res.status(200).send(playlist);
