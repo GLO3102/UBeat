@@ -79,7 +79,10 @@ exports.removeTrackFromPlaylist = function (req, res) {
         if (!err) {
             if (playlist) {
                 console.log(playlist.tracks);
-                var trackToRemove = playlist.tracks.id(req.params.trackId);
+                var trackToRemove = _.findWhere(playlist.tracks, {
+                    trackId: req.params.trackId
+                });
+                console.log(trackToRemove);
                 if (trackToRemove) {
                     trackToRemove.remove();
                     playlist.save();
@@ -87,13 +90,13 @@ exports.removeTrackFromPlaylist = function (req, res) {
                 } else {
                     res.status(404).send({
                         errorCode: 'TRACK_NOT_FOUND',
-                        message: 'Track ' + req.params.id + ' was not found'
+                        message: 'Track ' + req.params.trackId + ' was not found'
                     });
                 }
             } else {
                 res.status(404).send({
                     errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
+                    message: 'Playlist ' + req.params.trackId + ' was not found'
                 });
             }
         } else {
@@ -101,7 +104,7 @@ exports.removeTrackFromPlaylist = function (req, res) {
             if (err.name === 'CastError') {
                 res.status(404).send({
                     errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
+                    message: 'Playlist ' + req.params.playlistId + ' was not found'
                 });
             } else {
                 res.status(500).send(err);
@@ -142,7 +145,7 @@ exports.removePlaylist = function (req, res) {
     Playlist.findById(req.params.id, function (err, playlist) {
         if (!err) {
             if (playlist) {
-                if(playlist.owner.id == req.user.id) {
+                if (playlist.owner.id == req.user.id) {
                     playlist.remove();
                     res.status(200).send({
                         message: 'Playlist ' + req.params.id + ' deleted successfully'
