@@ -78,13 +78,12 @@ exports.removeTrackFromPlaylist = function (req, res) {
     Playlist.findById(req.params.playlistId, function (err, playlist) {
         if (!err) {
             if (playlist) {
-                console.log(playlist.tracks);
                 var trackToRemove = _.findWhere(playlist.tracks, {
                     trackId: req.params.trackId
                 });
-                console.log(trackToRemove);
+                console.log('TRACK TO REMOVE', trackToRemove);
                 if (trackToRemove) {
-                    trackToRemove.remove();
+                    playlist.tracks = _.without(playlist.tracks, trackToRemove);
                     playlist.save();
                     res.status(200).send();
                 } else {
