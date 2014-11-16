@@ -42,6 +42,7 @@ exports.findById = function (req, res) {
         });
     } catch (e) {
         console.log(e);
+		res.send(500);
     }
     
 };
@@ -87,6 +88,7 @@ exports.follow = function (req, res) {
                     if (!err) {
                         res.status(201).send(req.user.toDTO(true));
                     } else {
+						res.status(500).send('Impossible to follow.');
                         console.error(err);
                     }
                 });
@@ -98,6 +100,7 @@ exports.follow = function (req, res) {
             }
         } else {
             console.error(err);
+			res.send(500);
         }
     });
 };
