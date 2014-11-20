@@ -85,7 +85,7 @@ exports.removeTrackFromPlaylist = function (req, res) {
                 if (trackToRemove) {
                     trackToRemove.remove();
                     playlist.save();
-                    res.status(200).send();
+                    res.status(200).send(playlist);
                 } else {
                     res.status(404).send({
                         errorCode: 'TRACK_NOT_FOUND',
