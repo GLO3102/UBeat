@@ -49,6 +49,17 @@ app.use(flash());
 app.use(cors(corsOptions));
 app.use(express.static(__dirname + '/public'));
 
+app.use(function (error, req, res, next) {
+    if (error instanceof SyntaxError) {
+        res.status(412).send({
+            errorCode: 'PARSE_ERROR',
+            message: 'Arguments could not be parsed, make sure request is valid. Refer to the documentation : https://github.com/GLO3102/UBeat/wiki/2-API'
+        });
+    } else {
+        res.status(500).send('Something broke!', error);
+    }
+});
+
 app.get('/status', status.getStatus);
 app.get('/login', login.showLoginPage);
 app.post('/login', passport.authenticate('local-login'), login.getToken);
