@@ -54,7 +54,7 @@ exports.findById = function (req, res) {
             res.send(500);
         }
     }
-    
+
 };
 
 exports.findByName = function (req, res) {
@@ -92,22 +92,30 @@ exports.findByName = function (req, res) {
 exports.follow = function (req, res) {
     User.findById(req.body.id, function (err, userToFollow) {
         if (!err) {
-            if (!req.user.isFollowingUser(userToFollow.id)) {
-                req.user.following.push(userToFollow.toDTO(false));
-                req.user.save(function (err) {
-                    if (!err) {
-                        res.status(201).send(req.user.toDTO(true));
-                    } else {
-                        res.status(500).send('Impossible to follow.');
-                        console.error(err);
-                    }
-                });
+            if (userToFollow) {
+                if (!req.user.isFollowingUser(userToFollow.id)) {
+                    req.user.following.push(userToFollow.toDTO(false));
+                    req.user.save(function (err) {
+                        if (!err) {
+                            res.status(201).send(req.user.toDTO(true));
+                        } else {
+                            res.status(500).send('Impossible to follow.');
+                            console.error(err);
+                        }
+                    });
+                } else {
+                    res.status(412).send({
+                        errorCode: 'ALREADY_FOLLOWING_USER',
+                        message: 'You already follow user ' + req.body.id
+                    });
+                }
             } else {
-                res.status(412).send({
-                    errorCode: 'ALREADY_FOLLOWING_USER',
-                    message: 'You already follow user ' + req.body.id
+                res.status(404).send({
+                    errorCode: 'USER_NOT_FOUND',
+                    message: 'User with id ' + req.body.id + ' was not found'
                 });
             }
+
         } else {
             console.error(err);
             res.send(500);
@@ -116,7 +124,14 @@ exports.follow = function (req, res) {
 };
 
 exports.unfollow = function (req, res) {
-    req.user.unfollow(req.params.id);
-    req.user.save();
+    var userId = req.params.id;
+    if (req.user.isFollowingUser(userId)) {
+        req.user.unfollow(userId);
+    } else {
+        res.status(404).send({
+            errorCode: 'USER_NOT_FOUND',
+            message: 'User does not follow user with id ' + req.body.id
+        });
+    }
     res.status(200).send(req.user.toDTO(true));
 };

@@ -38,9 +38,17 @@ userSchema.methods.isFollowingUser = function (userId) {
 };
 
 userSchema.methods.unfollow = function (userId) {
-    this.following = _.without(this.following, _.findWhere(this.following, {
-        id: userId
-    }));
+    var userToRemove;
+    for (var i = 0; i < this.following.length; i++) {
+        if (this.following[i].id == userId) {
+            userToRemove = this.following[i]
+        }
+    }
+
+    if (userToRemove) {
+        this.following = _.without(this.following, userToRemove);
+        this.save();
+    }
 };
 
 userSchema.methods.generateHash = function (password) {
