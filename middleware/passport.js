@@ -32,24 +32,23 @@ module.exports = function (passport, app) {
 
                     if (!user || !user.validPassword(password)) {
                         return done(null, false);
+                    } else {
+                        var expires = moment().add(1, 'days').valueOf();
+                        user.token = jwt.encode(
+                            {
+                                iss: user.id,
+                                exp: expires
+                            },
+                            app.get('jwtTokenSecret')
+                        );
+
+                        user.save(function (err) {
+                            if (err) {
+                                return done(err);
+                            }
+                            return done(null, user);
+                        });
                     }
-
-                    var expires = moment().add(1, 'days').valueOf();
-                    user.token = jwt.encode(
-                        {
-                            iss: user.id,
-                            exp: expires
-                        },
-                        app.get('jwtTokenSecret')
-                    );
-
-                    user.save(function (err) {
-                        if (err) {
-                            return done(err);
-                        }
-
-                        return done(null, user);
-                    });
                 });
             });
         }));
