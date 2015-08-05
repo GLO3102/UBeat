@@ -22,4 +22,4 @@ Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki
 Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/2-API)
 
 ### Est-ce que je peux le faire en Angular?
-http://media.giphy.com/media/1WQLKmc1Gfhny/giphy.gif
+<img src="http://media.giphy.com/media/1WQLKmc1Gfhny/giphy.gif" alt=""/>
