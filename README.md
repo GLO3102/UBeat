@@ -7,13 +7,20 @@
 
 Music Library API
 
+## Énoncé du travail
 
+Voir l'énoncé du travail [sur cette page](https://github.com/GLO3102/UBeat/blob/master/Enonce.md)
 
 ## UBeat hébergé
 
-UBeat est disponible en version hébergée sur [ubeat.herokuapp.com](https://ubeat.herokuapp.com/).
+UBeat est disponible en version hébergée sur [ubeat.herokuapp.com](https://ubeat.herokuapp.com/). Si vous obtenez un "Cannot GET /", tout va bien, aucune route n'est implémentée au root...
 
-##Exécuter UBeat localement
+## Avant d'envoyer un mail de panique : 
+Si l'API est _down_ : nous avons déja été notifié. Nous tenterons de garder l'API _up_ le plus possible. Gardez en tête que vous pouvez rouler l'API en version locale très facilement.
+
+En cas de problème persistant, contactez les enseignants par courriel.
+
+## Exécuter UBeat localement
 
 Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/1-Installation-locale-Ubeat)
 
