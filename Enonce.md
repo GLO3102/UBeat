@@ -1,4 +1,4 @@
-# Projet de session - Ubeat
+# Projet de session - UBeat
 
 Le projet de session consiste à développer une application permettant de créer des listes de lectures musicales et de les partager entre amis.
 
