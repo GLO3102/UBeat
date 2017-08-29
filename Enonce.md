@@ -2,25 +2,9 @@
 
 Le projet de session consiste à développer une application permettant de créer des listes de lectures musicales et de les partager entre amis.
 
-Le projet doit être fait en équipe de 4 à 6 étudiants. L’équipe doit utiliser les dépôts GitHub fournis par les enseignants.
+Le projet doit être fait en équipe de 4 à 6 étudiants. L’équipe doit utiliser les dépôts GitHub fournis par les enseignants. L'application doit être réalisée en *anglais*.
 
-**Dates de remises:**
-
-<table>
-  <tr>
-    <td>Livrable 1</td>
-    <td>8 février 23h55</td>
-  </tr>
-  <tr>
-    <td>Livrable 2</td>
-    <td>8 mars 23h55</td>
-  </tr>
-  <tr>
-    <td>Livrable 3</td>
-    <td>26 avril 23h55</td>
-  </tr>
-</table>
-
+Voir dates de remise sur le portail des cours.
 
 **Pour chaque livrable**
 
@@ -44,7 +28,7 @@ Fournir un ZIP comprenant:
 
     * doit fonctionner sans aucune manipulation du correcteur
 
-    * doit fonctionner **sans erreurs ni exceptions** dans la console de Chrome (la correction sera fait dans Chrome, pas firefox, pas internet explorer). Si l’application n’est pas fonctionnelle et que le correcteur n’est pas en mesure de corriger, vous **risquez la note de zéro.**
+    * doit fonctionner **sans erreurs ni exceptions** dans la console de Chrome (la correction sera fait dans Chrome, pas de Firefox ou d'Edge). Si l’application n’est pas fonctionnelle et que le correcteur n’est pas en mesure de corriger, vous **risquez la note de zéro.**
 
 [Grille de correction disponible ici](https://docs.google.com/spreadsheets/d/1Atz9yrmn__4rpVM4wsr1xftgW42KSE4MCKMqPNsw0UQ/edit?usp=sharing)
 
@@ -63,8 +47,6 @@ Fournir un ZIP comprenant:
     * Lien pour se déconnecter
 
     * Lien vers les paramètres utilisateurs
-
-    * Inspirez vous des applications de musiques populaires (rdio, spotify, google play music, etc)
 
     * La barre doit être responsive
 
@@ -129,6 +111,14 @@ Fournir un ZIP comprenant:
             * Les images doivent s’adapter au 3 tailles d’écran
 
             * La liste des pistes doit être flexible et s’adapter à la largeur de l’écran
+
+* Page d'accueil de l'application
+
+    * La page d'accueil doit représenter le point d'entrée de votre application. Elle ne demande pas de fonctionnalité particulière, à vous d'être créatif!
+    
+    * Elle doit permettre d'accéder aux pages d'artiste, d'album et au menu.
+    
+    * La page doit etre responsive (Supporter 3 formats d'écrans).
 
 * Document design
 
@@ -280,7 +270,7 @@ Fournir un ZIP comprenant:
 
     * Une fonctionalité de votre choix
 
-        * Cette fonctionalité doit être approuvé par les 2 enseignants du cours
+        * Cette fonctionalité doit être approuvée par les 2 enseignants du cours.
 
 * Document design
 
