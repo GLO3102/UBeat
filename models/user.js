@@ -3,7 +3,8 @@ var bcrypt = require('bcrypt-nodejs');
 var modelHelpers = require('./modelHelpers.js');
 var _ = require('underscore');
 
-var userSchema = new mongoose.Schema({
+var userSchema = new mongoose.Schema();
+userSchema.add({
     name: String,
     email: String,
     password: String,

@@ -5,7 +5,8 @@ var modelHelpers = require('./modelHelpers.js');
 var trackSchema = require('./track').schema;
 var userSchema = require('./user').schema;
 
-var playlistSchema = new Schema({
+var playlistSchema = new Schema();
+playlistSchema.add({
     name: String,
     owner: {
         id: String,

@@ -4,32 +4,30 @@
   "description": "A REST API for the GLO-3102 class project UBeat",
   "main": "index.js",
   "dependencies": {
-    "cors": "~2.4.1",
-    "ejs": "~1.0.0",
-    "express": "~4.8.1",
-    "gravatar": "~1.0.6",
-    "passport": "~0.2.0",
-    "passport-facebook": "~1.0.3",
-    "passport-google": "~0.3.0",
-    "passport-local": "~1.0.0",
-    "mongoose": "~3.8.8",
-    "body-parser": "~1.6.1",
-    "cookie-parser": "~1.3.2",
-    "express-session": "~1.7.2",
-    "node-deezer": "~0.3.3",
-    "request": "~2.40.0",
-    "underscore": "~1.6.0",
-    "moment": "~2.8.1",
-    "jwt-simple": "~0.2.0",
     "bcrypt-nodejs": "0.0.3",
-    "connect-flash": "~0.1.1"
+    "body-parser": "^1.17.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "gravatar": "^1.6.0",
+    "jwt-simple": "^0.5.1",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.9",
+    "node-deezer": "^0.3.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "request": "^2.81.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "gulp": "~3.6.0",
-    "gulp-concat": "~2.2.0",
-    "gulp-less": "~1.2.3",
-    "gulp-symlink": "~0.4.2",
-    "gulp-util": "~3.0.0"
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^3.3.2",
+    "gulp-symlink": "^2.1.4",
+    "gulp-util": "^3.0.8"
   },
   "scripts": {
     "test": ""
@@ -41,7 +39,7 @@
   "author": "William Fortin & Vincent Seguin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wfortin/UBeat/issues"
+    "url": "https://github.com/GLO3102/UBeat/issues"
   },
-  "homepage": "https://github.com/wfortin/UBeat"
+  "homepage": "https://github.com/GLO3102/UBeat"
 }
