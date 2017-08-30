@@ -13,7 +13,7 @@ Voir l'énoncé du travail [sur cette page](https://github.com/GLO3102/UBeat/blo
 
 ## UBeat hébergé
 
-UBeat est disponible en version hébergée sur [ubeat.herokuapp.com](https://ubeat.herokuapp.com/). Si vous obtenez un "Cannot GET /", tout va bien, aucune route n'est implémentée au root...
+UBeat est disponible en version hébergée sur [ubeat.herokuapp.com](https://ubeat.herokuapp.com/).
 
 ## Avant d'envoyer un mail de panique : 
 Si l'API est _down_ : nous avons déja été notifié. Nous tenterons de garder l'API _up_ le plus possible. Gardez en tête que vous pouvez rouler l'API en version locale très facilement.
