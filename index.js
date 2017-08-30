@@ -60,6 +60,7 @@ app.use(function (error, req, res, next) {
     }
 });
 
+app.get('/', status.getHome);
 app.get('/status', status.getStatus);
 app.get('/login', login.showLoginPage);
 app.post('/login', passport.authenticate('local-login'), login.getToken);
