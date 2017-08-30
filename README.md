@@ -3,7 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/wfortin/UBeat.png)](https://codeclimate.com/github/wfortin/UBeat)
 <a href="https://www.statuscake.com" title="Website Uptime Monitoring"><img src="https://www.statuscake.com/App/button/index.php?Track=bggF7iyFwd&Days=1&Design=3" /></a>
 
-#UBeat
+# UBeat
 
 Music Library API
 
