@@ -32,3 +32,6 @@ Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki
 
 Voir la grille de correction [ici](https://docs.google.com/spreadsheets/d/1tAZorseSEgRE_G6VGlfba9N1hrv_egVkyU62bvNgHF8/edit?usp=sharing).
 
+## Starter-pack
+Utiliser le [starter pack](https://github.com/GLO3102/vue-starter) pour votre projet.
+
