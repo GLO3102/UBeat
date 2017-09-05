@@ -30,7 +30,6 @@ Fournir un ZIP comprenant:
 
     * doit fonctionner **sans erreurs ni exceptions** dans la console de Chrome (la correction sera fait dans Chrome, pas de Firefox ou d'Edge). Si l’application n’est pas fonctionnelle et que le correcteur n’est pas en mesure de corriger, vous **risquez la note de zéro.**
 
-[Grille de correction disponible ici](https://docs.google.com/spreadsheets/d/1Atz9yrmn__4rpVM4wsr1xftgW42KSE4MCKMqPNsw0UQ/edit?usp=sharing)
 
 ## Livrable 1
 
