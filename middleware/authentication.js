@@ -10,7 +10,7 @@ exports.isAuthenticated = function (req, res, next) {
             var decoded = jwt.decode(token, 'UBEAT_TOKEN_SECRET');
 
             if (decoded.exp <= Date.now()) {
-                res.status(401).send({
+                return res.status(401).send({
                     errorCode: 'ACCESS_DENIED',
                     message: 'Access token is expired'
                 });
@@ -22,7 +22,7 @@ exports.isAuthenticated = function (req, res, next) {
                         req.user = user;
                         return next()
                     } else {
-                        res.status(401).send({
+                        return res.status(401).send({
                             errorCode: 'ACCESS_DENIED',
                             message: 'User associated with token was not found'
                         });
