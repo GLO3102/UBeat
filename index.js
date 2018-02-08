@@ -87,6 +87,7 @@ app.get('/users/:id', authentication.isAuthenticated, user.findById);
 app.post('/follow', authentication.isAuthenticated, user.follow);
 app.delete('/follow/:id', authentication.isAuthenticated, user.unfollow);
 
+app.get('/tracks/:id', authentication.isAuthenticated, lookup.getTrack);
 app.get('/albums/:id', authentication.isAuthenticated, lookup.getAlbum);
 app.get('/albums/:id/tracks', authentication.isAuthenticated, lookup.getAlbumTracks);
 app.get('/artists/:id', authentication.isAuthenticated, lookup.getArtist);
@@ -112,6 +113,7 @@ app.get('/unsecure/users/:id', user.findById);
 app.post('/unsecure/follow', user.follow);
 app.delete('/unsecure/follow/:id', user.unfollow);
 
+app.get('/unsecure/tracks/:id', lookup.getTrack);
 app.get('/unsecure/albums/:id', lookup.getAlbum);
 app.get('/unsecure/albums/:id/tracks', lookup.getAlbumTracks);
 app.get('/unsecure/artists/:id', lookup.getArtist);

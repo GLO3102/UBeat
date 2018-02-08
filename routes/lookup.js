@@ -1,5 +1,12 @@
 var itunes = require('../common/itunes');
 
+exports.getTrack = function (req, res) {
+    itunes.lookup({
+        id: req.params.id,
+        entity: 'song'
+    }, res, 'single');
+};
+
 exports.getAlbum = function (req, res) {
     itunes.lookup({
         id: req.params.id,
