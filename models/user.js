@@ -10,20 +10,30 @@ userSchema.add({
     password: String,
     token: String,
     expiration: Number,
-    following: [userSchema]
+    following: [{
+        name: String,
+        email: String,
+        id: String
+    }]
 });
 
 userSchema.methods.toDTO = function (following) {
-    var obj = this.toObject();
+    var obj = this.toJSON();
 
     var dto = {
-        id: obj._id,
+        id: obj.id.toString(),
         name: obj.name,
         email: obj.email
     };
 
     if (following) {
-        dto.following = obj.following;
+        dto.following = obj.following.map((user) => {
+            return {
+                id: user.id,
+                email: user.email,
+                name: user.name
+            }
+        })
     }
 
     return dto;

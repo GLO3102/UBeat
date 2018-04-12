@@ -94,9 +94,14 @@ exports.follow = function (req, res) {
         if (!err) {
             if (userToFollow) {
                 if (!req.user.isFollowingUser(userToFollow.id)) {
-                    req.user.following.push(userToFollow.toDTO(false));
+                    req.user.following.push({
+                        id: userToFollow.id,
+                        email: userToFollow.email,
+                        name: userToFollow.name
+                    });
                     req.user.save(function (err) {
                         if (!err) {
+                            console.log(req.user.toDTO(true))
                             res.status(201).send(req.user.toDTO(true));
                         } else {
                             res.status(500).send('Impossible to follow.');
