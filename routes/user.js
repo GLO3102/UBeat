@@ -127,11 +127,11 @@ exports.unfollow = function (req, res) {
     var userId = req.params.id;
     if (req.user.isFollowingUser(userId)) {
         req.user.unfollow(userId);
+        res.status(200).send(req.user.toDTO(true));
     } else {
         res.status(404).send({
             errorCode: 'USER_NOT_FOUND',
             message: 'User does not follow user with id ' + req.body.id
         });
     }
-    res.status(200).send(req.user.toDTO(true));
 };
