@@ -1,10 +1,10 @@
 exports.toJSON = function() {
-    var obj = this.toObject();
+  const obj = this.toObject()
 
-    obj.id = obj._id;
-    delete obj._id;
-    delete obj.__v;
-    delete obj.password;
+  obj.id = obj._id
+  delete obj._id
+  delete obj.__v
+  delete obj.password
 
-    return obj;
-};
+  return obj
+}
