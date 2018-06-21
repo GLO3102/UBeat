@@ -8,8 +8,16 @@ const cors = require('cors')
 const passport = require('passport')
 
 const mongoose = require('mongoose')
-const mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/ubeat'
-mongoose.connect(mongoUri)
+const mongoUri =
+  process.env.MONGOLAB_URI || `mongodb://${process.env.DATABASE_URL}` || 'mongodb://localhost/ubeat'
+console.log(mongoUri)
+mongoose.connect(
+  mongoUri,
+  {
+    autoReconnect: true,
+    reconnectTries: Number.MAX_VALUE
+  }
+)
 
 const authentication = require('./middleware/authentication')
 const login = require('./routes/login')
