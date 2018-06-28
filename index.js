@@ -10,12 +10,10 @@ const passport = require('passport')
 const mongoose = require('mongoose')
 const mongoUri =
   process.env.MONGOLAB_URI || `mongodb://${process.env.DATABASE_URL}` || 'mongodb://localhost/ubeat'
-console.log(mongoUri)
 mongoose.connect(
   mongoUri,
   {
-    autoReconnect: true,
-    reconnectTries: Number.MAX_VALUE
+    autoReconnect: true
   }
 )
 
