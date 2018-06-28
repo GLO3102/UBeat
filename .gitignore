@@ -28,3 +28,5 @@ data
 node_modules
 .idea/*
 
+# Docker local files
+db
