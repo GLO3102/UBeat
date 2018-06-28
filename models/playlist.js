@@ -1,24 +1,24 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var modelHelpers = require('./modelHelpers.js');
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const modelHelpers = require('./modelHelpers.js')
 
-var trackSchema = require('./track').schema;
-var userSchema = require('./user').schema;
+const trackSchema = require('./track').schema
+const userSchema = require('./user').schema
 
-var playlistSchema = new Schema();
+const playlistSchema = new Schema()
 playlistSchema.add({
-    name: String,
-    owner: {
-        id: String,
-        email: String,
-        name: String
-    },
-    tracks: [trackSchema]
-});
+  name: String,
+  owner: {
+    id: String,
+    email: String,
+    name: String
+  },
+  tracks: [trackSchema]
+})
 
-playlistSchema.method('toJSON', modelHelpers.toJSON);
+playlistSchema.method('toJSON', modelHelpers.toJSON)
 
-var Playlist = mongoose.model('Playlist', playlistSchema);
+const Playlist = mongoose.model('Playlist', playlistSchema)
 
-exports.schema = playlistSchema;
-exports.model = Playlist;
+exports.schema = playlistSchema
+exports.model = Playlist

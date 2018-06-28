@@ -1,242 +1,230 @@
-var Playlist = require('../models/playlist').model;
-var User = require('../models/user').model;
-var Track = require('../models/track').model;
-var _ = require('underscore');
+const Playlist = require('../models/playlist').model
+const User = require('../models/user').model
+const Track = require('../models/track').model
+const _ = require('underscore')
 
-exports.createPlaylist = function (req, res) {
-    User.findById(req.user.id, function (err, user) {
-        if (!err) {
-            var playlist = new Playlist({
-                name: req.body.name,
-                owner: user.toJSON()
-            });
-            playlist.save(function (err) {
-                if (!err) {
-                    res.status(201).send(playlist);
-                } else {
-                    console.error(err);
-                }
-            });
-        } else {
-            console.error(err);
-        }
-    });
-};
+exports.createPlaylist = async function(req, res) {
+  try {
+    const user = await User.findById(req.user.id)
+    const playlist = new Playlist({
+      name: req.body.name,
+      owner: user.toJSON()
+    })
+    await playlist.save()
+    res.status(201).send(playlist)
+  } catch (err) {
+    console.error(err)
+    res.status(500)
+  }
+}
 
 // Unsecure (Will be removed after release 2)
-exports.createPlaylistUnsecure = function (req, res) {
-    var playlist = new Playlist({
-        name: req.body.name,
-        owner: req.body.owner
-    });
-    playlist.save(function (err) {
-        if (!err) {
-            res.status(201).send(playlist);
-        } else {
-            console.error(err);
-        }
-    });
-};
+exports.createPlaylistUnsecure = async function(req, res) {
+  const playlist = new Playlist({
+    name: req.body.name,
+    owner: req.body.owner
+  })
+  try {
+    await playlist.save()
+    res.status(201).send(playlist)
+  } catch (err) {
+    console.error(err)
+    res.status(500)
+  }
+}
 
-exports.addTrackToPlaylist = function (req, res) {
-    Playlist.findById(req.params.id, function (err, playlist) {
-        if (!err) {
-            if (playlist) {
-                if (req.body) {
-                    var track = new Track(req.body);
-                    playlist.tracks.push(track.toJSON());
-                    playlist.save();
-                    res.status(200).send(playlist);
-                } else {
-                    res.status(412).send({
-                        errorCode: 'REQUEST_BODY_REQUIRED',
-                        message: 'Request body is missing'
-                    });
-                }
-            } else {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            }
-        } else {
-            console.error(err);
-            if (err.name === 'CastError') {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            } else {
-                res.status(500).send(err);
-            }
-        }
-    });
-};
+exports.addTrackToPlaylist = async function(req, res) {
+  try {
+    const playlist = await Playlist.findById(req.params.id)
+    if (playlist) {
+      if (req.body) {
+        const track = new Track(req.body)
+        playlist.tracks.push(track.toJSON())
+        playlist.save()
+        res.status(200).send(playlist)
+      } else {
+        res.status(412).send({
+          errorCode: 'REQUEST_BODY_REQUIRED',
+          message: 'Request body is missing'
+        })
+      }
+    } else {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    }
+  } catch (err) {
+    console.error(err)
+    if (err.name === 'CastError') {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
 
-exports.removeTrackFromPlaylist = function (req, res) {
-    console.log(req.params.trackId);
-    Playlist.findById(req.params.playlistId, function (err, playlist) {
-        if (!err) {
-            if (playlist) {
-                var trackToRemove = playlist.tracks.filter(function (track) {
-                    return track.trackId == req.params.trackId;
-                }).pop();
+exports.removeTrackFromPlaylist = async function(req, res) {
+  try {
+    const playlist = await Playlist.findById(req.params.playlistId)
+    if (playlist) {
+      const trackToRemove = playlist.tracks
+        .filter(function(track) {
+          return track.trackId == req.params.trackId
+        })
+        .pop()
 
-                if (trackToRemove) {
-                    trackToRemove.remove();
-                    playlist.save();
-                    res.status(200).send(playlist);
-                } else {
-                    res.status(404).send({
-                        errorCode: 'TRACK_NOT_FOUND',
-                        message: 'Track ' + req.params.trackId + ' was not found'
-                    });
-                }
-            } else {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.playlistId + ' was not found'
-                });
-            }
-        } else {
-            console.error(err);
-            if (err.name === 'CastError') {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.playlistId + ' was not found'
-                });
-            } else {
-                res.status(500).send(err);
-            }
-        }
-    });
-};
+      if (trackToRemove) {
+        trackToRemove.remove()
+        playlist.save()
+        res.status(200).send(playlist)
+      } else {
+        res.status(404).send({
+          errorCode: 'TRACK_NOT_FOUND',
+          message: 'Track ' + req.params.trackId + ' was not found'
+        })
+      }
+    } else {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.playlistId + ' was not found'
+      })
+    }
+  } catch (err) {
+    console.error(err)
+    if (err.name === 'CastError') {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.playlistId + ' was not found'
+      })
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
 
-exports.updatePlaylist = function (req, res) {
-    Playlist.findById(req.params.id, function (err, playlist) {
-        if (!err) {
-            if (playlist) {
-                playlist.name = req.body.name;
-                playlist.tracks = req.body.tracks;
-                playlist.save();
-                res.status(200).send(playlist);
-            } else {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            }
-        } else {
-            console.error(err);
-            if (err.name === 'CastError') {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            } else {
-                res.status(500).send(err);
-            }
-        }
-    });
-};
+exports.updatePlaylist = async function(req, res) {
+  try {
+    const playlist = await Playlist.findById(req.params.id)
+    if (playlist) {
+      playlist.name = req.body.name
+      playlist.tracks = req.body.tracks
+      playlist.save()
+      res.status(200).send(playlist)
+    } else {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    }
+  } catch (err) {
+    console.error(err)
+    if (err.name === 'CastError') {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
 
-exports.removePlaylist = function (req, res) {
-    Playlist.findById(req.params.id, function (err, playlist) {
-        if (!err) {
-            if (playlist) {
-                if(playlist.owner.id == req.user.id) {
-                    playlist.remove();
-                    res.status(200).send({
-                        message: 'Playlist ' + req.params.id + ' deleted successfully'
-                    });
-                }
-                else {
-                    res.status(412).send({
-                        errorCode: 'NOT_PLAYLIST_OWNER',
-                        message: 'Playlist can only be deleted by their owner'
-                    });
-                }
-            } else {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            }
-        } else {
-            console.error(err);
-            if (err.name === 'CastError') {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            } else {
-                res.status(500).send(err);
-            }
-        }
-    });
-};
+exports.removePlaylist = async function(req, res) {
+  try {
+    const playlist = await Playlist.findById(req.params.id)
+    if (playlist) {
+      if (playlist.owner.id == req.user.id) {
+        playlist.remove()
+        res.status(200).send({
+          message: 'Playlist ' + req.params.id + ' deleted successfully'
+        })
+      } else {
+        res.status(412).send({
+          errorCode: 'NOT_PLAYLIST_OWNER',
+          message: 'Playlist can only be deleted by their owner'
+        })
+      }
+    } else {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    }
+  } catch (err) {
+    console.error(err)
+    if (err.name === 'CastError') {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
 
 // Unsecure (Will be removed after release 2)
-exports.removePlaylistUnsecure = function (req, res) {
-    Playlist.findById(req.params.id, function (err, playlist) {
-        if (!err) {
-            if (playlist) {
-                playlist.remove();
-                res.status(200).send({
-                    message: 'Playlist ' + req.params.id + ' deleted successfully'
-                });
-            } else {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            }
-        } else {
-            console.error(err);
-            if (err.name === 'CastError') {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            } else {
-                res.status(500).send(err);
-            }
-        }
-    });
-};
+exports.removePlaylistUnsecure = async function(req, res) {
+  try {
+    const playlist = await Playlist.findById(req.params.id)
+    if (playlist) {
+      playlist.remove()
+      res.status(200).send({
+        message: 'Playlist ' + req.params.id + ' deleted successfully'
+      })
+    } else {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    }
+  } catch (err) {
+    console.error(err)
+    if (err.name === 'CastError') {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
 
-exports.getPlaylists = function (req, res) {
-    Playlist.find({}, function (err, playlists) {
-        if (!err) {
-            res.status(200).send(playlists || []);
-        } else {
-            console.log(err);
-            res.status(500).send(err);
-        }
-    });
-};
+exports.getPlaylists = async function(req, res) {
+  try {
+    const playlists = await Playlist.find({})
+    res.status(200).send(playlists || [])
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+}
 
-exports.findPlaylistById = function (req, res) {
-    Playlist.findById(req.params.id, function (err, playlist) {
-        if (!err) {
-            if (playlist) {
-                res.status(200).send(playlist);
-            } else {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            }
-        } else {
-            console.error(err);
-            if (err.name === 'CastError') {
-                res.status(404).send({
-                    errorCode: 'PLAYLIST_NOT_FOUND',
-                    message: 'Playlist ' + req.params.id + ' was not found'
-                });
-            } else {
-                res.status(500).send(err);
-            }
-        }
-    });
-};
+exports.findPlaylistById = async function(req, res) {
+  try {
+    const playlist = await Playlist.findById(req.params.id)
+    if (playlist) {
+      res.status(200).send(playlist)
+    } else {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    }
+  } catch (err) {
+    console.error(err)
+    if (err.name === 'CastError') {
+      res.status(404).send({
+        errorCode: 'PLAYLIST_NOT_FOUND',
+        message: 'Playlist ' + req.params.id + ' was not found'
+      })
+    } else {
+      res.status(500).send(err)
+    }
+  }
+}
