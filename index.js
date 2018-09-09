@@ -8,8 +8,8 @@ const cors = require('cors')
 const passport = require('passport')
 
 const mongoose = require('mongoose')
-const mongoUri =
-  process.env.MONGOLAB_URI || `mongodb://${process.env.DATABASE_URL}` || 'mongodb://localhost/ubeat'
+const mongoUriFromEnv = process.env.DATABASE_URL ? `mongodb://${process.env.DATABASE_URL}` : process.env.MONGOLAB_URI;
+const mongoUri = mongoUriFromEnv || 'mongodb://localhost/ubeat';
 mongoose.connect(
   mongoUri,
   {
