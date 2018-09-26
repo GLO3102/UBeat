@@ -1,4 +1,4 @@
-const request = require('request-promise')
+const axios = require('axios')
 const qs = require('querystring')
 
 const searchEndPoint = 'http://itunes.apple.com/search?'
@@ -13,25 +13,16 @@ exports.lookup = function(parameters, res, amount) {
 }
 
 async function queryItunesApi(url, res, amount) {
-  const { error, response, body } = request({ uri: url, method: 'GET' })
-  if (!error && response.statusCode === 200) {
-    successCallback(res, JSON.parse(body), amount)
-  } else {
-    errorCallback(res, error, response, body)
+  try {
+    const { data } = await axios.get(url)
+    if (amount == 'many') {
+      data.results.splice(0, 1)
+      data.resultCount--
+      res.status(200).send(data)
+    } else {
+      res.status(200).send(data)
+    }
+  } catch (err) {
+    err && err.response && res.status(err.response.status).send(err.response.data)
   }
-}
-
-function successCallback(res, body, amount) {
-  if (amount == 'many') {
-    body.results.splice(0, 1)
-    body.resultCount--
-    res.status(200).send(body)
-  } else {
-    res.status(200).send(body)
-  }
-}
-
-function errorCallback(res, error, response, body) {
-  console.error(error, body)
-  res.status(response.statusCode).send(body)
 }

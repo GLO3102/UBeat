@@ -4,6 +4,7 @@
   "description": "A REST API for the GLO-3102 class project UBeat",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "1.18.3",
     "connect-flash": "0.1.1",
@@ -19,8 +20,6 @@
     "node-deezer": "0.3.3",
     "passport": "0.4.0",
     "passport-local": "1.0.0",
-    "request": "2.87.0",
-    "request-promise": "4.2.2",
     "underscore": "1.9.1"
   },
   "devDependencies": {
