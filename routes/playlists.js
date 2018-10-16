@@ -20,11 +20,12 @@ exports.createPlaylist = async function(req, res) {
 
 // Unsecure (Will be removed after release 2)
 exports.createPlaylistUnsecure = async function(req, res) {
-  const playlist = new Playlist({
-    name: req.body.name,
-    owner: req.body.owner
-  })
-  try {
+  try { 
+    const user = await User.findOne({'email' : req.body.owner});
+    const playlist = new Playlist({
+      name: req.body.name,
+      owner: user.toJSON()
+    })
     await playlist.save()
     res.status(201).send(playlist)
   } catch (err) {
