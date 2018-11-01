@@ -20,14 +20,21 @@ exports.createPlaylist = async function(req, res) {
 
 // Unsecure (Will be removed after release 2)
 exports.createPlaylistUnsecure = async function(req, res) {
-  try { 
-    const user = await User.findOne({'email' : req.body.owner});
-    const playlist = new Playlist({
-      name: req.body.name,
-      owner: user.toJSON()
-    })
-    await playlist.save()
-    res.status(201).send(playlist)
+  try {
+    const user = await User.findOne({ email: req.body.owner })
+    if (user) {
+      const playlist = new Playlist({
+        name: req.body.name,
+        owner: user.toJSON()
+      })
+      await playlist.save()
+      res.status(201).send(playlist)
+    } else {
+      res.status(404).send({
+        errorCode: 'USER_NOT_FOUND',
+        message: `User with email "${req.body.owner}" does not exist.`
+      })
+    }
   } catch (err) {
     console.error(err)
     res.status(500)
