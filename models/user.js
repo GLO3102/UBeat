@@ -42,7 +42,7 @@ userSchema.methods.toDTO = function(following) {
 }
 
 userSchema.methods.isFollowingUser = function(userId) {
-  for (const i = 0; i < this.following.length; i++) {
+  for (let i = 0; i < this.following.length; i++) {
     if (this.following[i].id == userId) {
       return true
     }
@@ -52,7 +52,7 @@ userSchema.methods.isFollowingUser = function(userId) {
 
 userSchema.methods.unfollow = function(userId) {
   let userToRemove
-  for (const i = 0; i < this.following.length; i++) {
+  for (let i = 0; i < this.following.length; i++) {
     if (this.following[i].id == userId) {
       userToRemove = this.following[i]
     }
