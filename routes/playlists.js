@@ -20,6 +20,13 @@ exports.createPlaylist = async function(req, res) {
 
 // Unsecure (Will be removed after release 2)
 exports.createPlaylistUnsecure = async function(req, res) {
+  if (!req.body.owner || !req.body.name) {
+    res(400).send({
+      errorCode: 'BAD_REQUEST',
+      message:
+        'Missing parameters. See documentation: https://github.com/GLO3102/UBeat/wiki/2.8-Playlists#post-playlists'
+    })
+  }
   try {
     const user = await User.findOne({ email: req.body.owner })
     if (user) {

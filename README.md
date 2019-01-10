@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/GLO3102/UBeat.svg?branch=master)](https://travis-ci.org/GLO3102/UBeat)
 [![Dependency Status](https://david-dm.org/glo3102/ubeat.svg)](https://david-dm.org/GLO3102/UBeat)
 [![Code Climate](https://codeclimate.com/github/wfortin/UBeat.png)](https://codeclimate.com/github/wfortin/UBeat)
 
@@ -14,7 +13,8 @@ Voir l'énoncé du travail [sur cette page](https://github.com/GLO3102/UBeat/blo
 
 UBeat est disponible en version hébergée sur [ubeat.herokuapp.com](https://ubeat.herokuapp.com/).
 
-## Avant d'envoyer un mail de panique : 
+## Avant d'envoyer un mail de panique :
+
 Si l'API est _down_ : nous avons déja été notifié. Nous tenterons de garder l'API _up_ le plus possible. Gardez en tête que vous pouvez rouler l'API en version locale très facilement.
 
 En cas de problème persistant, contactez les enseignants par courriel.
@@ -32,5 +32,5 @@ Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki
 Voir la grille de correction [ici](https://docs.google.com/spreadsheets/d/1tAZorseSEgRE_G6VGlfba9N1hrv_egVkyU62bvNgHF8/edit?usp=sharing).
 
 ## Starter-pack
-Utiliser le [starter pack](https://github.com/GLO3102/vue-starter) pour votre projet.
 
+Utiliser le [starter pack](https://github.com/GLO3102/vue-starter) pour votre projet.
