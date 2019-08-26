@@ -37,5 +37,7 @@ Utiliser le [starter pack](https://github.com/GLO3102/vue-starter) pour votre pr
 
 ## Frameworks
 Les frameworks **CSS** sont permis.
+
 Les frameworks **JS** qui ne sont pas litérallement ubeat.js sont permis - en cas de doute, écrivez à l'enseignant.
+
 Si vous désirez réaliser le projet de session avec un autre framework que Vue (React, Angular etc.) - veuillez communiquer avec l'enseignant avant de commencer.
