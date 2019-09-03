@@ -19,10 +19,6 @@ Si l'API est _down_ : nous avons déja été notifié. Nous tenterons de garder 
 
 En cas de problème persistant, contactez les enseignants par courriel.
 
-## Exécuter UBeat localement
-
-Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/1-Installation-locale-Ubeat)
-
 ## Documentation de l'API
 
 Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/2-API)
@@ -36,8 +32,17 @@ Voir la grille de correction [ici](https://docs.google.com/spreadsheets/d/1tAZor
 Utiliser le [starter pack](https://github.com/GLO3102/vue-starter) pour votre projet.
 
 ## Frameworks
+
 Les frameworks **CSS** sont permis.
 
 Les frameworks **JS** qui ne sont pas litérallement ubeat.js sont permis - en cas de doute, écrivez à l'enseignant.
 
 Si vous désirez réaliser le projet de session avec un autre framework que Vue (React, Angular etc.) - veuillez communiquer avec l'enseignant avant de commencer.
+
+## GitHub
+
+Notez que l'enseignant fournit les dépôts GitHub pour le cours. Vous recevrez des instructions lors de la première semaine.
+
+## Exécuter UBeat localement
+
+Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/1-Installation-locale-Ubeat)
