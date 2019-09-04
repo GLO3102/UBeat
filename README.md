@@ -46,3 +46,11 @@ Notez que l'enseignant fournit les dépôts GitHub pour le cours. Vous recevrez 
 ## Exécuter UBeat localement
 
 Voir la documentation dans le [wiki Ubeat](https://github.com/wfortin/UBeat/wiki/1-Installation-locale-Ubeat)
+
+## Extensions VSCode pratiques
+
+[Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+
+[ESlint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
