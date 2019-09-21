@@ -22,7 +22,7 @@ Fournir un ZIP comprenant:
 
         * Noms, IDULs et Matricules
 
-* Dossier qui comprend les fichiers html, css et js 
+* Dossier qui comprend les fichiers de votre projet (sans `node_modules`)
 
 * **ATTENTION** Votre application 
 
