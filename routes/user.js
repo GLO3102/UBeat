@@ -128,7 +128,7 @@ exports.unfollow = function(req, res) {
   }
 }
 
-exports.getPlaylistsByUserUnsecure = async function(req, res) {
+exports.getPlaylistsByUser = async function(req, res) {
   try {
     const userId = req.params.id;
     const playlists = await Playlist.find({'owner.id': userId});

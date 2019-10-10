@@ -91,6 +91,7 @@ app.get('/search/users', authentication.isAuthenticated, user.findByName)
 
 app.get('/users', authentication.isAuthenticated, user.allUsers)
 app.get('/users/:id', authentication.isAuthenticated, user.findById)
+app.get('/users/:id/playlists', authentication.isAuthenticated, user.getPlaylistsByUser)
 
 app.post('/follow', authentication.isAuthenticated, user.follow)
 app.delete('/follow/:id', authentication.isAuthenticated, user.unfollow)
@@ -121,7 +122,7 @@ app.get('/unsecure/search/users', user.findByName)
 
 app.get('/unsecure/users', user.allUsers)
 app.get('/unsecure/users/:id', user.findById)
-app.get('/unsecure/users/:id/playlists', user.getPlaylistsByUserUnsecure)
+app.get('/unsecure/users/:id/playlists', user.getPlaylistsByUser)
 
 app.post('/unsecure/follow', user.follow)
 app.delete('/unsecure/follow/:id', user.unfollow)
