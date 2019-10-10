@@ -1,4 +1,5 @@
 const User = require('../models/user.js').model
+const Playlist = require('../models/playlist.js').model
 
 exports.allUsers = async function(req, res) {
   try {
@@ -124,5 +125,15 @@ exports.unfollow = function(req, res) {
       errorCode: 'USER_NOT_FOUND',
       message: 'User does not follow user with id ' + req.body.id
     })
+  }
+}
+
+exports.getPlaylistsByUserUnsecure = async function(req, res) {
+  try {
+    const userId = req.params.id;
+    const playlists = await Playlist.find({'owner.id': userId});
+    res.status(200).send(playlists);
+  } catch (err) {
+    res.status(500).send(err);
   }
 }

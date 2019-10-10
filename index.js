@@ -121,6 +121,7 @@ app.get('/unsecure/search/users', user.findByName)
 
 app.get('/unsecure/users', user.allUsers)
 app.get('/unsecure/users/:id', user.findById)
+app.get('/unsecure/users/:id/playlists', user.getPlaylistsByUserUnsecure)
 
 app.post('/unsecure/follow', user.follow)
 app.delete('/unsecure/follow/:id', user.unfollow)
