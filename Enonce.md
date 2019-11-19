@@ -269,7 +269,7 @@ Fournir un ZIP comprenant:
 
     * Une fonctionalité de votre choix
 
-        * Cette fonctionalité doit être approuvée par les 2 enseignants du cours.
+        * Cette fonctionalité doit être approuvée par l'enseignant du cours.
 
 * Document design
 
