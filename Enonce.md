@@ -57,7 +57,7 @@ Fournir un ZIP comprenant:
 
         * Standard : Le menu est visible par default et plus gros
 
-* Afficher la page d’un artiste (artist.html)
+* Afficher la page d’un artiste
 
     * La page d’artiste doit comprendre le
 
@@ -69,7 +69,7 @@ Fournir un ZIP comprenant:
 
         * liste des ses albums
 
-    * La page doit être statique (les informations de l’artiste doivent être *hardcodées*), comprendre seulement du HTML et du CSS
+    * La page doit être statique (les informations de l’artiste doivent être *hardcodées*).
 
     * La page doit être responsive
 
@@ -79,7 +79,7 @@ Fournir un ZIP comprenant:
 
             * La listes d’albums doit être flexible et s’adapter à la largeur de l’écran
 
-* Afficher la page d’un album (album.html)
+* Afficher la page d’un album
 
     * La page d’album doit comprendre
 
@@ -101,7 +101,7 @@ Fournir un ZIP comprenant:
 
             * Le bouton play ne doit pas jouer la musique au livrable 1
 
-    * La page doit être statique (les informations de l’artiste doivent être *hardcodées*), comprendre seulement du HTML et du CSS ou JavaScript de présentation.
+    * La page doit être statique (les informations de l’artiste doivent être *hardcodées*).
 
     * La page doit être responsive
 
@@ -122,8 +122,6 @@ Fournir un ZIP comprenant:
 * Document design
 
     * Expliquer comment lancer l’application
-
-        * Ça ne devrait pas être plus compliqué que de donner le chemin de vos fichiers html...
 
 ## Livrable 2
 
@@ -269,7 +267,7 @@ Fournir un ZIP comprenant:
 
     * Une fonctionalité de votre choix
 
-        * Cette fonctionalité doit être approuvée par les 2 enseignants du cours.
+        * Cette fonctionalité doit être approuvée par l'enseignant du cours.
 
 * Document design
 
