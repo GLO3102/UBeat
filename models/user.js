@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt-nodejs')
+const bcrypt = require('bcryptjs')
 const modelHelpers = require('./modelHelpers.js')
 const _ = require('underscore')
 
@@ -65,7 +65,7 @@ userSchema.methods.unfollow = function(userId) {
 }
 
 userSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8))
 }
 userSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password)
