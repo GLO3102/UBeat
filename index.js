@@ -13,7 +13,8 @@ const mongoUri = mongoUriFromEnv || 'mongodb://localhost/ubeat'
 mongoose.connect(
   mongoUri,
   {
-    autoReconnect: true
+    autoReconnect: true,
+    useNewUrlParser: true
   }
 )
 
