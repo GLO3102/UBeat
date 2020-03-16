@@ -239,7 +239,7 @@ Fournir un ZIP comprenant:
 
     * Offrir un bouton suivre et arrêter de suivre pour ajouter ou supprimer cet utilisateur de votre liste d’amis.
 
-    * Afficher les amis de l’utilisiteur
+    * Afficher les amis de l’utilisateur
 
 * Validation et sécurité
 
